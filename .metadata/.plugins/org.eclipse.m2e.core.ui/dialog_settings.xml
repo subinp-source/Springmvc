@@ -25,16 +25,19 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="com.exercise.CountNumbers"/>
 			<item value="com.project.myProject"/>
 			<item value="com.project.trial.second.secondproject"/>
 			<item value="com.project.trial.MyProject1"/>
 		</list>
 		<list key="groupId">
+			<item value="com.exercise"/>
 			<item value="com.project"/>
 			<item value="com.project.trial.second"/>
 			<item value="com.project.trial"/>
 		</list>
 		<list key="artifactId">
+			<item value="CountNumbers"/>
 			<item value="myProject"/>
 			<item value="secondproject"/>
 			<item value="MyProject1"/>
