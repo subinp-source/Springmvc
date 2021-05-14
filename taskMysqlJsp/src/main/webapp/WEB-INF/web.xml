@@ -1,0 +1,27 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>GetConnectionController</servlet-name>
+  	<display-name>GetConnectionController</display-name>
+  	<description></description>
+  	<servlet-class>com.project.web.GetConnectionController</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>RegisterController</servlet-name>
+  	<display-name>RegisterController</display-name>
+  	<description></description>
+  	<servlet-class>com.project.register.RegisterController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>GetConnectionController</servlet-name>
+  	<url-pattern>/getconnection</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>RegisterController</servlet-name>
+  	<url-pattern>/Register</url-pattern>
+  </servlet-mapping>
+</web-app>
