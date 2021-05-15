@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="C:\Users\hp\eclipse-workspace\Springmvc-login-registration-maven\pom.xml"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -25,18 +26,26 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="com.project.MavenLoginSpringMvc"/>
+			<item value="com.task.maven.login.mavenlogin"/>
+			<item value="com.task.taskMysqlJsp"/>
 			<item value="com.exercise.CountNumbers"/>
 			<item value="com.project.myProject"/>
 			<item value="com.project.trial.second.secondproject"/>
 			<item value="com.project.trial.MyProject1"/>
 		</list>
 		<list key="groupId">
-			<item value="com.exercise"/>
 			<item value="com.project"/>
+			<item value="com.task.maven.login"/>
+			<item value="com.task"/>
+			<item value="com.exercise"/>
 			<item value="com.project.trial.second"/>
 			<item value="com.project.trial"/>
 		</list>
 		<list key="artifactId">
+			<item value="MavenLoginSpringMvc"/>
+			<item value="mavenlogin"/>
+			<item value="taskMysqlJsp"/>
 			<item value="CountNumbers"/>
 			<item value="myProject"/>
 			<item value="secondproject"/>
@@ -74,7 +83,28 @@
 		</list>
 	</section>
 	<section name="org.eclipse.m2e.core.pom.overview">
+		<list key="ciManagementUrl">
+		</list>
+		<list key="ciManagementSystem">
+		</list>
+		<list key="issueManagementSystem">
+		</list>
+		<list key="issueManagementUrl">
+		</list>
 	</section>
 	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="wizardPage">
+		<list key="groupId">
+			<item value="Springmvc-login-registration-maven"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="Springmvc-login-registration-maven"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
 	</section>
 </section>
