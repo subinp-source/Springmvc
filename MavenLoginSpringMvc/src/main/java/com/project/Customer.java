@@ -1,4 +1,4 @@
-package com.project.web.customer;
+package com.project;
 
 public class Customer {
 	
@@ -63,12 +63,6 @@ public class Customer {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	
-	
-	
-	
-	
+	}	
 
 }

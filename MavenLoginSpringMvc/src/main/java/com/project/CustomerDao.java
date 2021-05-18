@@ -1,10 +1,15 @@
-package com.project.web.dao;
+package com.project;
+import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
-import com.project.web.customer.Customer;
+
 public class CustomerDao {
 	private JdbcTemplate jdbctemplate;
 	public void setJdbctemplate(JdbcTemplate jdbctemplate) {
@@ -25,4 +30,27 @@ public class CustomerDao {
     		return customer;}
         });    
 }    
-}
+	
+	/*public  Boolean  saveEmployeeByPreparedStatement(final Customer e){  
+	    String query="insert into users(username,password,firstname,lastname,email,address,phone) values(?,?,?,?,?,?,?)";  
+	    return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
+	    public Boolean doInPreparedStatement(PreparedStatement ps)  
+	            throws SQLException, DataAccessException {  
+	              
+	        ps.setString(1,e.getUsername());  
+	        ps.setString(2,e.getPassword());  
+	        ps.setString(3,e.getFirstname());
+	        ps.setString(4,e.getLastname());  
+	        ps.setString(5,e.getEmail());  
+	        ps.setString(6,e.getAddress()); 
+	        ps.setString(7,e.getPhone());
+	         return ps.execute();
+	              
+	    }  
+	    }); */
+	}  
+	  
+	
+	
+	
+

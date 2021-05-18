@@ -5,6 +5,7 @@
 <input type="text" name="username" value="username">
 <input type="text" name="password">
 <input type="submit" value="login">
-</form>
+</form><br>
+<a href="Register.jsp">REGISTER</a>
 </body>
 </html>
