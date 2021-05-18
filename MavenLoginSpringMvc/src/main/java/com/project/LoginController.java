@@ -28,7 +28,7 @@ public class LoginController {
 		}
 		}
 	   
-	/*@RequestMapping("/registerprocess")
+	@RequestMapping("/registerprocess")
 	public String registerprocess(HttpServletRequest request,HttpServletResponse response) {
 	  Customer customer =new Customer();
 	   customer.setUsername(request.getParameter("username"));
@@ -42,7 +42,7 @@ public class LoginController {
 
 	    return "success.jsp";
 	
-	}*/
+	}
 	
 }
 	

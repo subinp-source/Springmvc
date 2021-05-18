@@ -1,6 +1,7 @@
 package com.project;
 import java.sql.PreparedStatement;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,7 +32,7 @@ public class CustomerDao {
         });    
 }    
 	
-	/*public  Boolean  saveEmployeeByPreparedStatement(final Customer e){  
+	    public  Boolean  saveEmployeeByPreparedStatement(final Customer e){  
 	    String query="insert into users(username,password,firstname,lastname,email,address,phone) values(?,?,?,?,?,?,?)";  
 	    return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
 	    public Boolean doInPreparedStatement(PreparedStatement ps)  
@@ -47,9 +48,9 @@ public class CustomerDao {
 	         return ps.execute();
 	              
 	    }  
-	    }); */
+	    }); 
 	}  
-	  
+}	  
 	
 	
 	
