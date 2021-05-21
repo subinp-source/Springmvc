@@ -7,8 +7,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.ui.Model;
-import org.springframework.web.servlet.ModelAndView;
 
 public class CustomerDao {
 	private JdbcTemplate jdbctemplate;
@@ -73,21 +71,44 @@ public class CustomerDao {
 			int TotalPrice = (dosaCount*10)+(beefCount*90)+(chapathiCount*8);
 			return TotalPrice;
 			
-		}  
-	    
-	    
-	    
-	    
-	        
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
+		}
+	public int updateDosa(int dosaCount) {
+		  String sql="update fooditem set final_quantity=final_quantity-"+dosaCount+" where food_id=1";    
+		    return jdbctemplate.update(sql);
+		
+	}
+	public int updateBeefroast(int beefCount) {
+		 String sql="update fooditem set final_quantity=final_quantity-"+beefCount+" where food_id=3";    
+		    return jdbctemplate.update(sql);
+		
+	}
+	public int updateChapathi(int chapathiCount) {
+		 String sql="update fooditem set final_quantity=final_quantity-"+chapathiCount+" where food_id=2";    
+		    return jdbctemplate.update(sql);
+		
+	}
+	public int updatefooddosa(int dosacnt) {
+		
+		 String sql="update fooditem set final_quantity=final_quantity+"+dosacnt+" where food_id=1";    
+		    return jdbctemplate.update(sql);
+	}  
+	
+	
+	public int updatefoodbeef(int beefcnt) {
+		
+		 String sql="update fooditem set final_quantity=final_quantity+"+beefcnt+" where food_id=3";    
+		    return jdbctemplate.update(sql);
+	}  
+	
+	public int updatefoodchapathi(int chapathicnt) {
+		
+		 String sql="update fooditem set final_quantity=final_quantity+"+chapathicnt+" where food_id=2";    
+		    return jdbctemplate.update(sql);
+	}  
+	
+	
+	
+    
 	    
 }	  
 	

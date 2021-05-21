@@ -18,6 +18,11 @@ public class LoginController {
 	@RequestMapping("/login")
 	public ModelAndView login(@RequestParam("username") String username,@RequestParam("password") String password,HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mv= new ModelAndView();
+		if (username.equals("subin123")&& password.equals("0000")) {
+			mv.setViewName("admin.jsp");
+			return mv;
+		}
+		
 		List<Customer> list=dao.getData(username,password);
 		if(list.isEmpty()) {
 			String message="you are entered wrong details";
@@ -50,9 +55,11 @@ public class LoginController {
 		int DosaCount = Integer.parseInt(request.getParameter("dosa"));
 		int BeefCount = Integer.parseInt(request.getParameter("beef"));
 		int ChapathiCount = Integer.parseInt(request.getParameter("chapathi"));
+		dao.updateDosa(DosaCount);
+		dao.updateBeefroast(BeefCount);
+		dao.updateChapathi(ChapathiCount);
 		
-		
-		if ((DosaCount+BeefCount+ChapathiCount)>0) {
+		if ((DosaCount+BeefCount+ChapathiCount)!= 0) {
 			int totalprice= dao.getPrice(DosaCount,BeefCount,ChapathiCount);
 			
 			mav.addObject("totalprice",totalprice);
@@ -65,9 +72,6 @@ public class LoginController {
 			mav.addObject("message",message);
 			return mav;
 		}
-		
-		
-		
 		
 	}
 	
@@ -89,6 +93,17 @@ public class LoginController {
 
 	    return "success.jsp";
 	
+	}
+	
+	
+	@RequestMapping("/updatingfood")
+	public void updatefood(HttpServletRequest request,HttpServletResponse response) {
+		int dosacnt1 = Integer.parseInt(request.getParameter("dosacnt"));
+		int beefcnt1 = Integer.parseInt(request.getParameter("beefcnt"));
+		int chapathicnt1 = Integer.parseInt(request.getParameter("chapathicnt"));
+		dao.updatefooddosa(dosacnt1);
+		dao.updatefoodbeef(beefcnt1);
+		dao.updateChapathi(chapathicnt1);
 	}
 	
 }

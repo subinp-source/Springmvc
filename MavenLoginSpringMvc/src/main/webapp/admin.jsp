@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%><%@ page isELIgnored="false"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-Dear , your total cost is Rs. <%= request.getAttribute("totalprice") %>.<br>
-Thanks for booking.
+<h1>Welcome to Admin page</h1>
+<h3></h3><a href="addfood.jsp">Add food items</a></h3>
 </body>
 </html>
