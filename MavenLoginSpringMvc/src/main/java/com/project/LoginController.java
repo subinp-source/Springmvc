@@ -142,22 +142,32 @@ public class LoginController {
 	
 	  @RequestMapping(value="/booking/{food_id}",method = RequestMethod.GET) 
 	public String book(@PathVariable int food_id,HttpServletRequest request,Model m){
-		 
+		  
 	  int value=Integer.parseInt(request.getParameter("count"));
 	  
+	  dao.updateFood(value,food_id);
+	  
 	  List<Price> accept=dao.price(food_id);
-		/*
-		 * List<Food> list = dao.getFoodDetails(); m.addAttribute("list", list);
-		 */
-		 
+	  
 	  for (Price price : accept) {
 	  sum=sum+(price.getEach_price()*value);
 	  }
-	 dao.updateFood(value,food_id);
+	  
+	 int id=customer.getCustomer_id();
+	  dao.updateorder(food_id,id,value);
+	  
+	  
+	
 	  
 	 return "redirect:/details"; 
 	 }
 
+	  
+	  
+	  
+	  
+	  
+	  
 	@RequestMapping(value="/summation/{sum}",method = RequestMethod.GET)
 	public String summation(@PathVariable int sum, HttpServletRequest request, Model m) {
 		m.addAttribute("name",customer.getFirstname());
@@ -171,6 +181,12 @@ public class LoginController {
 		return"index.jsp";
 	}
 	
-	
+	@RequestMapping("/orderdetails")
+	public String vieworder(Model m) {
+		List<OrderDetails> list = dao.getOrderDetails();
+		m.addAttribute("list",list);
+		 
+		return "order.jsp";
+	}
 	
 }

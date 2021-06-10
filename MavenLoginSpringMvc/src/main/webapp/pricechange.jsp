@@ -16,8 +16,5 @@
    </form>
    </c:forEach><br>
    <a href="admin.jsp">back to admin page</a>
-
-
-
 </body>
 </html>

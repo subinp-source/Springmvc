@@ -63,40 +63,14 @@ public class CustomerDao {
 	        });    
 	    }
 	    
-	/*public int getPrice(int dosaCount, int beefCount, int chapathiCount) 
-	{    
-			int TotalPrice = (dosaCount*10)+(beefCount*90)+(chapathiCount*8);
-			return TotalPrice;
-			
-		}*/
+
 	public int updateFood(int Count,int food_id) {
 		  String sql="update fooditem set final_quantity=final_quantity-"+Count+" where food_id="+food_id;    
 		    return jdbctemplate.update(sql);
 		
 	}
 	
-	/*
-	 * public int updateBeefroast(int beefCount) { String
-	 * sql="update fooditem set final_quantity=final_quantity-"
-	 * +beefCount+" where food_id=3"; return jdbctemplate.update(sql);
-	 * 
-	 * } public int updateChapathi(int chapathiCount) { String
-	 * sql="update fooditem set final_quantity=final_quantity-"
-	 * +chapathiCount+" where food_id=2"; return jdbctemplate.update(sql);}*/
-	 
-	  
-	/*
-	 * public int updatefooddosa(int dosacnt) {
-	 * 
-	 * String sql="update fooditem set final_quantity=final_quantity+"
-	 * +dosacnt+" where food_id=1"; return jdbctemplate.update(sql); }
-	 * 
-	 * 
-	 * public int updatefoodbeef(int beefcnt) {
-	 * 
-	 * String sql="update fooditem set final_quantity=final_quantity+"
-	 * +beefcnt+" where food_id=3"; return jdbctemplate.update(sql); }
-	 */
+	
 	public int updatefoodcount(int foodcount,int food_id) {
 		
 		 String sql="update fooditem set final_quantity=final_quantity+"+foodcount+" where food_id="+food_id;    
@@ -121,6 +95,34 @@ public class CustomerDao {
 		
 		 String sql="update fooditem set food_price="+price+" where food_id="+food_id;    
 		    return jdbctemplate.update(sql);
+	}
+	
+	
+	public int updateorder(int food_id, int id, int value) {
+		
+		String sql="insert into o_details(customer_id,food_id,order_quantity) values("+id+","+food_id+","+value+")";    
+	    return jdbctemplate.update(sql);
+		
+		
+	}
+	
+	
+	
+	public List<OrderDetails> getOrderDetails() {   
+		        return jdbctemplate.query("select * from  o_details",new RowMapper<OrderDetails>(){    
+		            public OrderDetails mapRow(ResultSet resultset, int row) throws SQLException {    
+		            	OrderDetails details=new OrderDetails(); 
+		                details.setFood_id(resultset.getInt("food_id"));
+		                details.setCustomer_id(resultset.getInt("customer_id"));    
+		                details.setOrder_quantity(resultset.getInt("order_quantity"));    
+		                
+		                return details;    
+		            }    
+		        });    
+		    
+		
+		
+		
 	} 
 	
 	

@@ -10,10 +10,13 @@
 <h1>Welcome to Admin page</h1>
 <h3><form action="addfood">
 <input type="submit" value="add food">
-</form>
+</form><br>
 <form action="changeprice">
 <input type="submit" value="price change">
 </form></h3>
+<form action="orderdetails">
+<input type="submit" value="order details">
+</form>
 <a href="index.jsp">back to login</a>
 </body>
 </html>
