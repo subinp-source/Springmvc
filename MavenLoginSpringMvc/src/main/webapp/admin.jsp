@@ -8,6 +8,12 @@
 </head>
 <body>
 <h1>Welcome to Admin page</h1>
-<h3></h3><a href="addfood.jsp">Add food items</a></h3>
+<h3><form action="addfood">
+<input type="submit" value="add food">
+</form>
+<form action="changeprice">
+<input type="submit" value="price change">
+</form></h3>
+<a href="index.jsp">back to login</a>
 </body>
 </html>

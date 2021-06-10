@@ -22,7 +22,7 @@ public class CustomerDao {
     		customer.setPassword(rs.getString("password"));
     		customer.setFirstname(rs.getString("firstname"));
     		customer.setLastname(rs.getString("lastname"));
-    		customer.setLastname(rs.getString("address"));
+    		customer.setAddress(rs.getString("address"));
     		customer.setEmail(rs.getString("email"));
     		customer.setPhone(rs.getString("phone"));
     		customer.setCustomer_id(rs.getInt("customer_id"));
@@ -53,7 +53,8 @@ public class CustomerDao {
 	    public List<Food> getFoodDetails(){    
 	        return jdbctemplate.query("select * from fooditem",new RowMapper<Food>(){    
 	            public Food mapRow(ResultSet resultset, int row) throws SQLException {    
-	                Food food=new Food();    
+	                Food food=new Food(); 
+	                food.setFood_id(resultset.getInt("food_id"));
 	                food.setFood_item(resultset.getString("food_item"));    
 	                food.setFood_price(resultset.getInt("food_price"));    
 	                food.setFinal_quantity(resultset.getInt("final_quantity"));
@@ -62,49 +63,65 @@ public class CustomerDao {
 	        });    
 	    }
 	    
-	    
-	    
-	    
-	    
-	public int getPrice(int dosaCount, int beefCount, int chapathiCount) 
+	/*public int getPrice(int dosaCount, int beefCount, int chapathiCount) 
 	{    
 			int TotalPrice = (dosaCount*10)+(beefCount*90)+(chapathiCount*8);
 			return TotalPrice;
 			
-		}
-	public int updateDosa(int dosaCount) {
-		  String sql="update fooditem set final_quantity=final_quantity-"+dosaCount+" where food_id=1";    
+		}*/
+	public int updateFood(int Count,int food_id) {
+		  String sql="update fooditem set final_quantity=final_quantity-"+Count+" where food_id="+food_id;    
 		    return jdbctemplate.update(sql);
 		
 	}
-	public int updateBeefroast(int beefCount) {
-		 String sql="update fooditem set final_quantity=final_quantity-"+beefCount+" where food_id=3";    
-		    return jdbctemplate.update(sql);
+	
+	/*
+	 * public int updateBeefroast(int beefCount) { String
+	 * sql="update fooditem set final_quantity=final_quantity-"
+	 * +beefCount+" where food_id=3"; return jdbctemplate.update(sql);
+	 * 
+	 * } public int updateChapathi(int chapathiCount) { String
+	 * sql="update fooditem set final_quantity=final_quantity-"
+	 * +chapathiCount+" where food_id=2"; return jdbctemplate.update(sql);}*/
+	 
+	  
+	/*
+	 * public int updatefooddosa(int dosacnt) {
+	 * 
+	 * String sql="update fooditem set final_quantity=final_quantity+"
+	 * +dosacnt+" where food_id=1"; return jdbctemplate.update(sql); }
+	 * 
+	 * 
+	 * public int updatefoodbeef(int beefcnt) {
+	 * 
+	 * String sql="update fooditem set final_quantity=final_quantity+"
+	 * +beefcnt+" where food_id=3"; return jdbctemplate.update(sql); }
+	 */
+	public int updatefoodcount(int foodcount,int food_id) {
 		
+		 String sql="update fooditem set final_quantity=final_quantity+"+foodcount+" where food_id="+food_id;    
+		    return jdbctemplate.update(sql);
 	}
-	public int updateChapathi(int chapathiCount) {
-		 String sql="update fooditem set final_quantity=final_quantity-"+chapathiCount+" where food_id=2";    
-		    return jdbctemplate.update(sql);
-		
+	
+	
+	
+	
+	
+	
+	public List<Price> price(int food_id) {
+		 return (List<Price>) jdbctemplate.query("select food_price from fooditem where food_id="+food_id,new RowMapper<Price>(){    
+	            public Price mapRow(ResultSet resultset, int row) throws SQLException {    
+	                Price price=new Price();    
+	                price.setEach_price(resultset.getInt("food_price"));    
+	                return price;    
+	            }    
+	        }); 
 	}
-	public int updatefooddosa(int dosacnt) {
+	public int changeprice(int price, int food_id) {
 		
-		 String sql="update fooditem set final_quantity=final_quantity+"+dosacnt+" where food_id=1";    
+		 String sql="update fooditem set food_price="+price+" where food_id="+food_id;    
 		    return jdbctemplate.update(sql);
-	}  
-	
-	
-	public int updatefoodbeef(int beefcnt) {
-		
-		 String sql="update fooditem set final_quantity=final_quantity+"+beefcnt+" where food_id=3";    
-		    return jdbctemplate.update(sql);
-	}  
-	
-	public int updatefoodchapathi(int chapathicnt) {
-		
-		 String sql="update fooditem set final_quantity=final_quantity+"+chapathicnt+" where food_id=2";    
-		    return jdbctemplate.update(sql);
-	}  
+	} 
 	
 	
 	

@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-Dear , your total cost is Rs. <%= request.getAttribute("totalprice") %>.<br>
-Thanks for booking.<br>
-<a href="index.jsp">LOGIN</a>
+dear ${name}, you cost Rs.${sum} for this order.<br>And food will be dispatched to this ${address} soon...<br>
+<form action="out">
+<input type="submit" value="Log out">
+</form>
 </body>
 </html>

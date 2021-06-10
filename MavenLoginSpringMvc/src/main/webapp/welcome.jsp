@@ -9,7 +9,10 @@
 <body>
  welcome: <%= request.getAttribute("message")  %>
  <h2>you can now select the restaurant show below.</h2><br>
- <h3>Alibaba restaurant :</h3><form action="restaurant"><input type="submit" value="click here"></form>
- 
+ <h3>Alibaba restaurant :</h3><form action="details"><input type="submit" value="click here">
+ </form>
+<!--   <form action="something">
+ <input type="submit" 
+ </form> -->
 </body>
 </html>
