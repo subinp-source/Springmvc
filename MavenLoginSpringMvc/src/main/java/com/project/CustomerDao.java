@@ -98,13 +98,7 @@ public class CustomerDao {
 	}
 	
 	
-	public int updateorder(int food_id, int id, int value) {
-		
-		String sql="insert into o_details(customer_id,food_id,order_quantity) values("+id+","+food_id+","+value+")";    
-	    return jdbctemplate.update(sql);
-		
-		
-	}
+	
 	
 	
 	
@@ -123,12 +117,72 @@ public class CustomerDao {
 		
 		
 		
-	} 
+	}
+	public int updateorder(int food_id, int id, int value) {
+			
+			String sql="insert into o_details(customer_id,food_id,order_quantity) values("+id+","+food_id+","+value+")";    
+		    return jdbctemplate.update(sql);
+			
+			
+		
+		
+	}
+	/*
+	 * public int insertorderfunction(int id, String food_item, int value) {
+	 * 
+	 * String
+	 * sql="insert into user_order(customer_id,food_item,order_quantity) values("+id
+	 * +","+"'"+food_item+"'"+","+value+")"; return jdbctemplate.update(sql);
+	 * 
+	 * }
+	 * 
+	 * public List<UserOrder> getUserOrders(int userid) { String
+	 * query="select * from user_order where customer_id='"+userid+"'"; return
+	 * jdbctemplate.query(query,new RowMapper<UserOrder>(){ public UserOrder
+	 * mapRow(ResultSet rs, int row) throws SQLException { UserOrder userorder=new
+	 * UserOrder(); userorder.setCustomer_id(rs.getInt("customer_id"));
+	 * userorder.setFood_item(rs.getString("food_item"));
+	 * userorder.setOrder_quantity(rs.getInt("order_quantity"));
+	 * 
+	 * return userorder;} }); }
+	 */
 	
 	
 	
-    
-	    
+	/*public Cart cart(int id, String food_item, int value) {
+		Cart cart =new Cart();
+		cart.setCustomer_id(id);
+		cart.setFood_item(food_item);
+		cart.setOrder_quantity(value);
+		//@SuppressWarnings("unchecked")
+		//List<Cart> carts=(List<Cart>) cart;
+		return cart;
+	}*/
+	
+	public int updatetablevalues(String food_item, int id, int value) {
+		String sql="insert into temp(customer_id,food_item,order_quantity) values("+id+","+"'"+food_item+"'"+","+value+")";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public List<Cart> getTablevalues(int id) {
+		
+		String  query="select * from temp where customer_id='"+id+"'"; return
+			  jdbctemplate.query(query,new RowMapper<Cart>(){
+				  public Cart mapRow(ResultSet rs, int row) throws SQLException {
+					  Cart cart=new Cart(); 
+					  cart.setCustomer_id(rs.getInt("customer_id"));
+					  cart.setFood_item(rs.getString("food_item"));
+					  cart.setOrder_quantity(rs.getInt("order_quantity"));
+			  
+			  return cart;} }); }
+	
+	
+	
+	public int emptyTable() {
+		String sql="TRUNCATE TABLE temp";    
+	    return jdbctemplate.update(sql);
+		
+	}
 }	  
 	
 	

@@ -10,7 +10,7 @@
 <body> 
  <c:forEach var="food" items="${list}">
         ${food.food_item} Rs.${food.food_price} 
-        <form action="booking/${food.food_id}">
+        <form action="booking/${food.food_id}/${food.food_item}">
         <input type="text" name="count">
         <input type="submit" value="add"><br><br>
    </form>

@@ -1,10 +1,12 @@
 package com.project;
 
-public class OrderDetails {
-
+public class UserOrder {
+	
 	private int customer_id;
-	private int food_id;
+	private String food_item;
 	private int order_quantity;
+	
+	
 	
 	public int getCustomer_id() {
 		return customer_id;
@@ -12,11 +14,11 @@ public class OrderDetails {
 	public void setCustomer_id(int customer_id) {
 		this.customer_id = customer_id;
 	}
-	public int getFood_id() {
-		return food_id;
+	public String getFood_item() {
+		return food_item;
 	}
-	public void setFood_id(int food_id) {
-		this.food_id = food_id;
+	public void setFood_item(String food_item) {
+		this.food_item = food_item;
 	}
 	public int getOrder_quantity() {
 		return order_quantity;
@@ -24,8 +26,13 @@ public class OrderDetails {
 	public void setOrder_quantity(int order_quantity) {
 		this.order_quantity = order_quantity;
 	}
+	@Override
+	public String toString() {
+		return "UserOrder [customer_id=" + customer_id + ", food_item=" + food_item + ", order_quantity="
+				+ order_quantity + "]";
+	}
+	
+	
+	
 
-	
-	
-	
 }

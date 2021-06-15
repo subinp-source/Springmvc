@@ -1,5 +1,5 @@
 package com.project;
-
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +20,7 @@ public class LoginController {
 	CustomerDao dao;
     Customer customer;
     int sum ;
+    List<Cart> cart; 
 	@RequestMapping("/login")
 	public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -39,19 +40,12 @@ public class LoginController {
 		} else {
 			
 			mv.setViewName("welcome.jsp");
-			sum=0;
+			sum=0;dao.emptyTable();
 			mv.addObject("message",customer.getFirstname());
 			return mv;
 		}
 	}
 
-	@RequestMapping("/details")
-	public String viewfood(Model m) {
-		List<Food> list = dao.getFoodDetails();
-		m.addAttribute("list",list);
-		m.addAttribute("sum",sum); 
-		return "restaurant.jsp";
-	}
 	
 	
 	@RequestMapping("/addfood")
@@ -60,42 +54,6 @@ public class LoginController {
 		m.addAttribute("list1",list1);
 		return "addfood.jsp";
 	}
-
-	/*
-	 * @RequestMapping("/booking/${fooditem.food_id}") public ModelAndView
-	 * BookFood(@PathVariable("fooditem.food_id") List<Integer> foodid,@RequestParam
-	 * ArrayList<Integer> values,HttpServletRequest request,HttpServletResponse
-	 * response) { ModelAndView mav = new ModelAndView(); request.getParameterMap();
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * return mav; }
-	 */
-
-	// int DosaCount = Integer.parseInt(request.getParameter("dosa"));
-	// int BeefCount = Integer.parseInt(request.getParameter("beef"));
-	// int ChapathiCount = Integer.parseInt(request.getParameter("chapathi"));
-	// dao.updateDosa(DosaCount);
-	// dao.updateBeefroast(BeefCount);
-	// dao.updateChapathi(ChapathiCount);}
-
-	/*
-	 * if ((DosaCount+BeefCount+ChapathiCount)!= 0) { int totalprice=
-	 * dao.getPrice(DosaCount,BeefCount,ChapathiCount);
-	 * 
-	 * mav.addObject("totalprice",totalprice); mav.setViewName("booked.jsp"); return
-	 * mav;
-	 * 
-	 * }else { String message ="please provide some food quantity";
-	 * mav.setViewName("declare.jsp"); mav.addObject("message",message); return mav;
-	 * } }
-	 */
 
 	@RequestMapping("/registerprocess")
 	public String registerprocess(HttpServletRequest request, HttpServletResponse response) {
@@ -134,15 +92,23 @@ public class LoginController {
 		dao.changeprice(price,food_id);
 		return "redirect:/changeprice";
 		
-		
 	}
-
 	
 	
 	
-	  @RequestMapping(value="/booking/{food_id}",method = RequestMethod.GET) 
-	public String book(@PathVariable int food_id,HttpServletRequest request,Model m){
-		  
+	@RequestMapping("/detail")
+	public String viewfood(Model m) {
+		List<Food> list = dao.getFoodDetails();
+		m.addAttribute("list",list);
+		m.addAttribute("sum",sum);
+		return "restaurant.jsp";
+	}
+	
+	
+	 
+	@RequestMapping(value="/booking/{food_id}/{food_item}",method = RequestMethod.GET) 
+	public String book(@PathVariable int food_id,@PathVariable String food_item,HttpServletRequest request,Model m){
+		 
 	  int value=Integer.parseInt(request.getParameter("count"));
 	  
 	  dao.updateFood(value,food_id);
@@ -154,39 +120,66 @@ public class LoginController {
 	  }
 	  
 	 int id=customer.getCustomer_id();
+	 
 	  dao.updateorder(food_id,id,value);
+	 /* dao.insertorderfunction(id,food_item,value);
+	Cart carts =dao.cart(id,food_item,value);
+	 cart.add(carts);
+	  
+	  Cart objt = new Cart(id,food_item,value); 
+	  List<Cart> carts=new ArrayList<Cart>();
+
+	  carts.add(objt);
+          carted=carts;*/
+
+
 	  
 	  
-	
 	  
-	 return "redirect:/details"; 
+		
+		  dao.updatetablevalues(food_item,id,value); 
+		  cart=dao.getTablevalues(id);
+		 
+	 
+	 return "redirect:/detail"; 
+	 
 	 }
 
 	  
-	  
-	  
-	  
-	  
-	  
 	@RequestMapping(value="/summation/{sum}",method = RequestMethod.GET)
-	public String summation(@PathVariable int sum, HttpServletRequest request, Model m) {
+	public String summation(@PathVariable int sum,HttpServletRequest request, Model m) {
 		m.addAttribute("name",customer.getFirstname());
 		m.addAttribute("address",customer.getAddress());
 		m.addAttribute("sum", sum);
+		int userid = customer.getCustomer_id();
+		 //List<UserOrder> lists = dao.getUserOrders(userid);
+		//m.addAttribute("userorder",lists);
+		m.addAttribute("items",cart);
+		
 		return "/nxt.jsp";
 	}
+	
 
-	@RequestMapping("/out")
-	public String logout() {
-		return"index.jsp";
-	}
+	/*
+	 * @RequestMapping("/out") public String logout() { return"index.jsp"; }
+	 */
+	
+	  @RequestMapping("/summation/shipping") 
+	  public ModelAndView address(HttpServletRequest request,Model m) { 
+		  ModelAndView mvn=new ModelAndView();
+		 // m.addAttribute("trace",request.getParameter("address"));
+		  mvn.addObject("trace",request.getParameter("address"));
+		  mvn.setViewName("/final.jsp");
+	  return mvn; }
+	 
 	
 	@RequestMapping("/orderdetails")
 	public String vieworder(Model m) {
 		List<OrderDetails> list = dao.getOrderDetails();
 		m.addAttribute("list",list);
-		 
 		return "order.jsp";
 	}
+	
+	
 	
 }
