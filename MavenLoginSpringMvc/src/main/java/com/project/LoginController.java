@@ -19,7 +19,7 @@ public class LoginController {
 	@Autowired
 	CustomerDao dao;
     Customer customer;
-    int sum ;
+    int sum ;List<Cartlisting> listing;
     List<Cart> cart; 
 	@RequestMapping("/login")
 	public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password,
@@ -40,13 +40,18 @@ public class LoginController {
 		} else {
 			
 			mv.setViewName("welcome.jsp");
-			sum=0;dao.emptyTable();
+			sum=0;
+			dao.emptyTable();
 			mv.addObject("message",customer.getFirstname());
+			listing=null;dao.emptycart();
 			return mv;
 		}
 	}
 
-	
+	@RequestMapping("/index")
+	public String index() {
+		return "index.jsp";
+	}
 	
 	@RequestMapping("/addfood")
 	public String addfood(Model m) {
@@ -101,6 +106,7 @@ public class LoginController {
 		List<Food> list = dao.getFoodDetails();
 		m.addAttribute("list",list);
 		m.addAttribute("sum",sum);
+		m.addAttribute("listing",listing);
 		return "restaurant.jsp";
 	}
 	
@@ -108,18 +114,19 @@ public class LoginController {
 	 
 	@RequestMapping(value="/booking/{food_id}/{food_item}",method = RequestMethod.GET) 
 	public String book(@PathVariable int food_id,@PathVariable String food_item,HttpServletRequest request,Model m){
-		 
+		int id=customer.getCustomer_id();
 	  int value=Integer.parseInt(request.getParameter("count"));
-	  
-	  dao.updateFood(value,food_id);
-	  
+	  dao.updatecartlisting(id,value,food_item);
+	  //dao.updateFood(value,food_id);
+	  List<Cartlisting> listed=dao.makelist();
+	  listing=listed;
 	  List<Price> accept=dao.price(food_id);
 	  
 	  for (Price price : accept) {
 	  sum=sum+(price.getEach_price()*value);
 	  }
 	  
-	 int id=customer.getCustomer_id();
+	 
 	 
 	  dao.updateorder(food_id,id,value);
 	 /* dao.insertorderfunction(id,food_item,value);
@@ -148,6 +155,7 @@ public class LoginController {
 	  
 	@RequestMapping(value="/summation/{sum}",method = RequestMethod.GET)
 	public String summation(@PathVariable int sum,HttpServletRequest request, Model m) {
+		
 		m.addAttribute("name",customer.getFirstname());
 		m.addAttribute("address",customer.getAddress());
 		m.addAttribute("sum", sum);
@@ -156,21 +164,16 @@ public class LoginController {
 		//m.addAttribute("userorder",lists);
 		m.addAttribute("items",cart);
 		
-		return "/nxt.jsp";
+		return "/sumDetails.jsp";
 	}
 	
-
-	/*
-	 * @RequestMapping("/out") public String logout() { return"index.jsp"; }
-	 */
-	
 	  @RequestMapping("/summation/shipping") 
-	  public ModelAndView address(HttpServletRequest request,Model m) { 
+	  public ModelAndView address(HttpServletRequest request) { 
 		  ModelAndView mvn=new ModelAndView();
-		 // m.addAttribute("trace",request.getParameter("address"));
 		  mvn.addObject("trace",request.getParameter("address"));
 		  mvn.setViewName("/final.jsp");
-	  return mvn; }
+	  return mvn;
+	  }
 	 
 	
 	@RequestMapping("/orderdetails")
@@ -179,6 +182,20 @@ public class LoginController {
 		m.addAttribute("list",list);
 		return "order.jsp";
 	}
+	
+	
+	@RequestMapping("/summation/back")
+	public String back() {
+		return "redirect:/detail";
+	}
+	
+	
+	@RequestMapping("/summation/home")
+	public String home() {
+		return"redirect:/index";
+	}
+	
+	
 	
 	
 	

@@ -21,21 +21,21 @@ dear ${name},
    </tr>  
    </c:forEach>  
    </table>  
-   <br/> <%-- <c:forEach var = "i" begin = "1" end = "3">
-    ${namefood} : ${quant}     <p>
-      
-   
-   </c:forEach> --%>
+   <br/>
    <br/><br>
 
    you cost Rs.${sum} for this order.<br><br>
-   <h2><a href="final1.jsp">next</a></h2>
+   <h2>Shipping Address</h2>
+ <form action="shipping">
+   <input type="text" name="address">
+   <input type="submit" value="change">
+   </form><br> 
    
-   
-<a href="restaurant.jsp">back</a><br>
-<a href="index.jsp">home</a>
-<%-- <form action="out">
-<input type="submit" value="Log out">
-</form> --%>
+<form action="back">
+   <input type="submit" value="Back">
+   </form><br>
+<form action="home">
+   <input type="submit" value="Home">
+   </form><br>
 </body>
 </html>

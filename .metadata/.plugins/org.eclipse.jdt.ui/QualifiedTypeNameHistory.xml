@@ -38,7 +38,10 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
-    <fullyQualifiedTypeName name="com.project.Cart"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="org.springframework.web.servlet.ModelAndView"/>
+    <fullyQualifiedTypeName name="com.project.Cartlisting"/>
+    <fullyQualifiedTypeName name="com.project.Cart"/>
+    <fullyQualifiedTypeName name="com.project.OrderDetails"/>
+    <fullyQualifiedTypeName name="com.project.Food"/>
 </qualifiedTypeNameHistroy>
