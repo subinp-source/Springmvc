@@ -21,6 +21,9 @@
         <input type="submit"  value="Log In Here">       
         <br><br>
     </form><br><a href="Register.jsp">REGISTER</a>     
-</div>    
+<form action="controllerApi">
+<input type="submit" value="covid report">
+</form> </div> 
+  
 </body>    
 </html>   

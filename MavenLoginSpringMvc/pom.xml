@@ -57,6 +57,15 @@
     <artifactId>tomcat-jasper</artifactId>  
     <version>9.0.12</version>  
 </dependency>
+
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.9.4</version>
+</dependency>
+
+
+
  </dependencies>
   <build>
     <finalName>MavenLoginSpringMvc</finalName>

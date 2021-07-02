@@ -1,5 +1,4 @@
 package com.project;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,33 +18,38 @@ public class LoginController {
 	@Autowired
 	CustomerDao dao;
     Customer customer;
+    ServiceClass service;
     int sum ;List<Cartlisting> listing;
     List<Cart> cart; 
+    
+    
 	@RequestMapping("/login")
-	public ModelAndView login(@RequestParam("username") String username, @RequestParam("password") String password,
-			HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
+		//return service.login(request,customer,sum,listing);
+		ModelAndView mav=new ModelAndView();
+		String username=request.getParameter("username");
+		String password=request.getParameter("password");
 		if (username.equals("subin123") && password.equals("0000")) {
-			mv.setViewName("admin.jsp");
-			return mv;
+			mav.setViewName("admin.jsp");
+			return mav;
 		}
 
 		List<Customer> list = dao.getData(username, password);
 		          customer=list.get(0);
 		if (list.isEmpty()) {
 			String message = "you are entered wrong details";
-			mv.setViewName("error.jsp");
-			mv.addObject("message", message);
-			return mv;
+			mav.setViewName("error.jsp");
+			 mav.addObject("message", message);
+			return mav;
 		} else {
 			
-			mv.setViewName("welcome.jsp");
 			sum=0;
 			dao.emptyTable();
-			mv.addObject("message",customer.getFirstname());
-			listing=null;dao.emptycart();
-			return mv;
+			mav.addObject("message",customer.getFirstname());
+			listing=null;dao.emptycart();mav.setViewName("welcome.jsp");
+			return mav;
 		}
+		
 	}
 
 	@RequestMapping("/index")
@@ -55,9 +59,8 @@ public class LoginController {
 	
 	@RequestMapping("/addfood")
 	public String addfood(Model m) {
-		List<Food> list1 = dao.getFoodDetails();
-		m.addAttribute("list1",list1);
-		return "addfood.jsp";
+		return service.addfood(m);
+		
 	}
 
 	@RequestMapping("/registerprocess")
@@ -84,10 +87,8 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/changeprice")
-	public String changeprice(HttpServletRequest request, Model m) {
-		List<Food> list2 = dao.getFoodDetails();
-		m.addAttribute("list1",list2);
-		return "pricechange.jsp";
+	public String changeprice(Model m) {
+		return service.changePrice(m);
 	}
 	
 	@RequestMapping("/pricechange/{food_id}")
@@ -103,6 +104,7 @@ public class LoginController {
 	
 	@RequestMapping("/detail")
 	public String viewfood(Model m) {
+		//return service.viewFood(m,sum,listing);
 		List<Food> list = dao.getFoodDetails();
 		m.addAttribute("list",list);
 		m.addAttribute("sum",sum);
@@ -117,7 +119,7 @@ public class LoginController {
 		int id=customer.getCustomer_id();
 	  int value=Integer.parseInt(request.getParameter("count"));
 	  dao.updatecartlisting(id,value,food_item);
-	  //dao.updateFood(value,food_id);
+	  dao.updateFood(value,food_id);
 	  List<Cartlisting> listed=dao.makelist();
 	  listing=listed;
 	  List<Price> accept=dao.price(food_id);
@@ -178,9 +180,7 @@ public class LoginController {
 	
 	@RequestMapping("/orderdetails")
 	public String vieworder(Model m) {
-		List<OrderDetails> list = dao.getOrderDetails();
-		m.addAttribute("list",list);
-		return "order.jsp";
+		return service.viewOrder(m);
 	}
 	
 	
