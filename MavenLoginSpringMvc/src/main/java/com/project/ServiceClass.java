@@ -11,25 +11,25 @@ import org.springframework.web.servlet.ModelAndView;
 public class ServiceClass {
 	@Autowired
 	CustomerDao dao;
-	public String addfood(Model m) {
+	/*public String addfood(Model m) {
 		List<Food> list1 = dao.getFoodDetails();
 		m.addAttribute("list1",list1);
 		return "addfood.jsp";
 		
-	}
+	}*/
 	
-	public String changePrice(Model m) {
+	/*public String changePrice(Model m) {
 		
 		List<Food> list2 = dao.getFoodDetails();
 		m.addAttribute("list1",list2);
 		return "pricechange.jsp";
-	}
+	}*/
 
-	public String viewOrder(Model m) {
+	/*public String viewOrder(Model m) {
 		List<OrderDetails> list = dao.getOrderDetails();
 		m.addAttribute("list",list);
 		return "order.jsp";
-	}
+	}*/
 
 	/*public String viewFood(Model m,int sum,List<Cartlisting> listing) {
 		List<Food> list = dao.getFoodDetails();

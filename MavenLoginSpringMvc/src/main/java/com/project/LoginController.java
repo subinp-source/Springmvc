@@ -59,7 +59,11 @@ public class LoginController {
 	
 	@RequestMapping("/addfood")
 	public String addfood(Model m) {
-		return service.addfood(m);
+		//return service.addfood(m);
+		List<Food> list1 = dao.getFoodDetails();
+		m.addAttribute("list1",list1);
+		return "addfood.jsp";
+		
 		
 	}
 
@@ -88,7 +92,10 @@ public class LoginController {
 	
 	@RequestMapping("/changeprice")
 	public String changeprice(Model m) {
-		return service.changePrice(m);
+		//return service.changePrice(m);
+		List<Food> list2 = dao.getFoodDetails();
+		m.addAttribute("list1",list2);
+		return "pricechange.jsp";
 	}
 	
 	@RequestMapping("/pricechange/{food_id}")
@@ -180,7 +187,10 @@ public class LoginController {
 	
 	@RequestMapping("/orderdetails")
 	public String vieworder(Model m) {
-		return service.viewOrder(m);
+		//return service.viewOrder(m);
+		List<OrderDetails> list = dao.getOrderDetails();
+		m.addAttribute("list",list);
+		return "order.jsp";
 	}
 	
 	
