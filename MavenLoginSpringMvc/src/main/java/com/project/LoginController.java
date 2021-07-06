@@ -3,6 +3,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.NonNullFields;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -57,12 +60,13 @@ public class LoginController {
 		return "index.jsp";
 	}
 	
+	
 	@RequestMapping("/addfood")
 	public String addfood(Model m) {
-		//return service.addfood(m);
-		List<Food> list1 = dao.getFoodDetails();
+		return service.addfood(m);
+		/*List<Food> list1 = dao.getFoodDetails();
 		m.addAttribute("list1",list1);
-		return "addfood.jsp";
+		return "addfood.jsp";*/
 		
 		
 	}
