@@ -1,0 +1,8 @@
+@charset "ISO-8859-1";
+body {
+    text-align: center; 
+    background-image: url("../resource/image/img2.jpg");
+    background-repeat: no-repeat;
+    background-size:1920px 1080px;
+    height: 1000px;
+}

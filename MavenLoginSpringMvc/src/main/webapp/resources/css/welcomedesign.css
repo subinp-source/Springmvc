@@ -1,8 +1,0 @@
-@charset "ISO-8859-1";
-body {
-    text-align: center; 
-    background-image: url("../resources/images/download.jpg");
-    background-repeat: no-repeat;
-    background-size: 1500px 250px;
-    height: 250px;
-}
