@@ -29,4 +29,6 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd
 <bean id="cdao" class="com.project.CustomerDao">
 <property name="jdbctemplate" ref="jdbctemplate"></property>
 </bean>
+
+<bean id="service" class="com.project.ServiceClass"/>
 </beans>

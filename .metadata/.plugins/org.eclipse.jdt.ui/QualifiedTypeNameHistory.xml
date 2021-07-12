@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.project.web.model.Alien"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
     <fullyQualifiedTypeName name="com.project.register.dao.RegisterControllerDao"/>
     <fullyQualifiedTypeName name="jbr.springmvc.model.User"/>
@@ -26,11 +25,9 @@
     <fullyQualifiedTypeName name="java.sql.Array"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="com.project.Cartlisting"/>
     <fullyQualifiedTypeName name="com.project.Cart"/>
-    <fullyQualifiedTypeName name="com.project.OrderDetails"/>
     <fullyQualifiedTypeName name="com.project.Food"/>
     <fullyQualifiedTypeName name="org.apache.tomcat.util.json.JSONParser"/>
     <fullyQualifiedTypeName name="java.io.FileReader"/>
@@ -60,4 +57,7 @@
     <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="com.modelclass.Food"/>
+    <fullyQualifiedTypeName name="com.project.OrderDetails"/>
 </qualifiedTypeNameHistroy>

@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-food items will be shipped soon to this  ${trace} <%-- <%= request.getAttribute("trace") %>   --%> 
+<h1>food items will be shipped soon to this  ${trace} </h1><%-- <%= request.getAttribute("trace") %>   --%> 
 
 </body>
 </html>

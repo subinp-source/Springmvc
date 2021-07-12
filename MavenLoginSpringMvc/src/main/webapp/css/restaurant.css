@@ -1,0 +1,13 @@
+@charset "ISO-8859-1";
+body {
+    text-align: left; 
+    /*background-image: url("../resource/image/beefporataindex.jpg");*/
+    background-repeat: no-repeat;
+    background-size:cover;
+    height: 1000px;
+}
+h2{
+	text-align: center;  
+    color: black;  
+    padding: 20px;
+}

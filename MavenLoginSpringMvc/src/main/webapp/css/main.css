@@ -3,8 +3,15 @@ body
 {  
     margin: 0;  
     padding: 0;  
-    background-color:#6abadeba;  
-    font-family: 'Arial';  
+    background-color:white; 
+    font-family: 'Arial';
+     text-align: center; 
+    background-image: url("../resource/image/beefporataindex.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    height: 1000px; 
+    
+      
 }  
 .login{  
         width: 382px;  

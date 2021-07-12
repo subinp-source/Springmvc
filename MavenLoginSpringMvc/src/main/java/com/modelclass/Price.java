@@ -1,4 +1,4 @@
-package com.project;
+package com.modelclass;
 
 public class Price {
      private int Each_price;

@@ -1,5 +1,6 @@
-package com.project;
+package com.dao;
 import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -7,6 +8,13 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
+
+import com.modelclass.Cart;
+import com.modelclass.Cartlisting;
+import com.modelclass.Customer;
+import com.modelclass.Food;
+import com.modelclass.OrderDetails;
+import com.modelclass.Price;
 
 public class CustomerDao {
 	private JdbcTemplate jdbctemplate;
@@ -30,19 +38,19 @@ public class CustomerDao {
         });    
 }    
 	
-	    public  Boolean  saveEmployeeByPreparedStatement(final Customer e){  
+	    public  Boolean  saveEmployeeByPreparedStatement(final Customer customer){  
 	    String query="insert into users(username,password,firstname,lastname,email,address,phone) values(?,?,?,?,?,?,?)";  
 	    return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
 	    public Boolean doInPreparedStatement(PreparedStatement ps)  
 	            throws SQLException, DataAccessException {  
 	              
-	        ps.setString(1,e.getUsername());  
-	        ps.setString(2,e.getPassword());  
-	        ps.setString(3,e.getFirstname());
-	        ps.setString(4,e.getLastname());  
-	        ps.setString(5,e.getEmail());  
-	        ps.setString(6,e.getAddress()); 
-	        ps.setString(7,e.getPhone());
+	        ps.setString(1,customer.getUsername());  
+	        ps.setString(2,customer.getPassword());  
+	        ps.setString(3,customer.getFirstname());
+	        ps.setString(4,customer.getLastname());  
+	        ps.setString(5,customer.getEmail());  
+	        ps.setString(6,customer.getAddress()); 
+	        ps.setString(7,customer.getPhone());
 	         return ps.execute();
 	              
 	    }  
@@ -121,10 +129,7 @@ public class CustomerDao {
 	public int updateorder(int food_id, int id, int value) {
 			
 			String sql="insert into o_details(customer_id,food_id,order_quantity) values("+id+","+food_id+","+value+")";    
-		    return jdbctemplate.update(sql);
-			
-			
-		
+		    return jdbctemplate.update(sql);	
 		
 	}
 	/*

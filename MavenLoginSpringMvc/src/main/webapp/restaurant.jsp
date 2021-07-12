@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Insert title here</title><link rel="stylesheet" type="text/css" href="css/restaurant.css"/>
   <!--  <script type="text/javascript">
         function myfunc() {
             var input = document.getElementById('count');
@@ -13,17 +13,17 @@
         } 
     </script> -->
 </head>
-<body> 
+<body> <h2>
  <c:forEach var="food" items="${list}">
         ${food.food_item} Rs.${food.food_price} 
         <form action="booking/${food.food_id}/${food.food_item}">
         <input type="text" name="count" value="${value}"  id="count">
         <input type="submit" value="add" ><br><br>
    </form>
-   </c:forEach><br>
-    <form action="summation/${sum}"><input type="submit" value="order"></form><br><br>
+   </c:forEach><br></h2>
+   <h2><form action="summation/${sum}"><input type="submit" value="order"></form></h2>
     
-     <table align="left">   
+    <h2><table align="center">   
    <c:forEach var="cartlisting" items="${listing}">   
    <tr>  
    <td>${cartlisting.food_item}</td>  
@@ -32,7 +32,7 @@
    </tr>  
    </c:forEach>  
    </table>  
-   <br/>
+   <br/></h2>
     
     
   </body> 

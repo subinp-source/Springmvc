@@ -3,6 +3,11 @@ body {
     text-align: center; 
     background-image: url("../resource/image/img2.jpg");
     background-repeat: no-repeat;
-    background-size:1920px 1080px;
+    background-size:cover;
     height: 1000px;
+}
+h1{  
+    text-align: center;  
+    color: white;  
+    padding: 20px;  
 }

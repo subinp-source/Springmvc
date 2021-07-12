@@ -7,7 +7,7 @@
 <body>    
     <h2>Login Page</h2><br>    
     <div class="login">    
-    <form  action= "login" >    
+    <form  action= "login" method="post">    
         <label><b>User Name     
         </b>    
         </label>    

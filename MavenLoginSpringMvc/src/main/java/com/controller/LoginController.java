@@ -1,4 +1,4 @@
-package com.project;
+package com.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,21 +15,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dao.CustomerDao;
+import com.modelclass.Cart;
+import com.modelclass.Cartlisting;
+import com.modelclass.Customer;
+import com.modelclass.OrderDetails;
+import com.modelclass.Price;
+import com.service.ServiceClass;
+
 @Controller
 public class LoginController {
 
 	@Autowired
 	CustomerDao dao;
     Customer customer;
+    @Autowired
     ServiceClass service;
     int sum ;List<Cartlisting> listing;
     List<Cart> cart; 
     
     
-	@RequestMapping("/login")
+	@RequestMapping(value="/login",method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
-		//return service.login(request,customer,sum,listing);
-		ModelAndView mav=new ModelAndView();
+		return service.login(request,customer,sum,listing);
+		/*ModelAndView mav=new ModelAndView();
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
 		if (username.equals("subin123") && password.equals("0000")) {
@@ -51,7 +60,7 @@ public class LoginController {
 			mav.addObject("message",customer.getFirstname());
 			listing=null;dao.emptycart();mav.setViewName("welcome.jsp");
 			return mav;
-		}
+		}*/
 		
 	}
 
@@ -72,18 +81,8 @@ public class LoginController {
 	}
 
 	@RequestMapping("/registerprocess")
-	public String registerprocess(HttpServletRequest request, HttpServletResponse response) {
-		Customer customer = new Customer();
-		customer.setUsername(request.getParameter("username"));
-		customer.setPassword(request.getParameter("password"));
-		customer.setFirstname(request.getParameter("firstname"));
-		customer.setLastname(request.getParameter("lastname"));
-		customer.setEmail(request.getParameter("email"));
-		customer.setAddress(request.getParameter("address"));
-		customer.setPhone(request.getParameter("phone"));
-		dao.saveEmployeeByPreparedStatement(customer);
-
-		return "success.jsp";
+	public String registerprocess(HttpServletRequest request) {
+		return service.register(request);
 
 	}
 
@@ -96,10 +95,10 @@ public class LoginController {
 	
 	@RequestMapping("/changeprice")
 	public String changeprice(Model m) {
-		//return service.changePrice(m);
-		List<Food> list2 = dao.getFoodDetails();
+		return service.changePrice(m);
+		/*List<Food> list2 = dao.getFoodDetails();
 		m.addAttribute("list1",list2);
-		return "pricechange.jsp";
+		return "pricechange.jsp";*/
 	}
 	
 	@RequestMapping("/pricechange/{food_id}")
@@ -115,12 +114,12 @@ public class LoginController {
 	
 	@RequestMapping("/detail")
 	public String viewfood(Model m) {
-		//return service.viewFood(m,sum,listing);
-		List<Food> list = dao.getFoodDetails();
+		return service.viewFood(m,sum,listing);
+		/*List<Food> list = dao.getFoodDetails();
 		m.addAttribute("list",list);
 		m.addAttribute("sum",sum);
 		m.addAttribute("listing",listing);
-		return "restaurant.jsp";
+		return "restaurant.jsp";*/
 	}
 	
 	

@@ -1,10 +1,13 @@
-package com.project;
+package com.modelclass;
 
-public class Cart {
+public class UserOrder {
 	
 	private int customer_id;
 	private String food_item;
 	private int order_quantity;
+	
+	
+	
 	public int getCustomer_id() {
 		return customer_id;
 	}
@@ -25,9 +28,11 @@ public class Cart {
 	}
 	@Override
 	public String toString() {
-		return "Cart [customer_id=" + customer_id + ", food_item=" + food_item + ", order_quantity=" + order_quantity
-				+ "]";
+		return "UserOrder [customer_id=" + customer_id + ", food_item=" + food_item + ", order_quantity="
+				+ order_quantity + "]";
 	}
+	
+	
 	
 
 }

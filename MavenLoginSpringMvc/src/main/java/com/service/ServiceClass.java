@@ -1,4 +1,4 @@
-package com.project;
+package com.service;
 
 import java.util.List;
 
@@ -10,6 +10,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.dao.CustomerDao;
+import com.modelclass.Cartlisting;
+import com.modelclass.Customer;
+import com.modelclass.Food;
+import com.modelclass.OrderDetails;
 
 
 public class ServiceClass {
@@ -73,8 +79,20 @@ public ModelAndView login(HttpServletRequest request,Customer customer,int sum,L
 	}
 
 	
+	public String register(HttpServletRequest request) {
 	
-	
-
+		Customer customer = new Customer();
+		customer.setUsername(request.getParameter("username"));
+		customer.setPassword(request.getParameter("password"));
+		customer.setFirstname(request.getParameter("firstname"));
+		customer.setLastname(request.getParameter("lastname"));
+		customer.setEmail(request.getParameter("email"));
+		customer.setAddress(request.getParameter("address"));
+		customer.setPhone(request.getParameter("phone"));
+		dao.saveEmployeeByPreparedStatement(customer);
+		
+		return "success.jsp";
+		
+	}
 
 }

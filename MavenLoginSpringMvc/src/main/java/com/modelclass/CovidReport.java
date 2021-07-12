@@ -1,4 +1,4 @@
-package com.project;
+package com.modelclass;
 
 import java.util.List;
 
