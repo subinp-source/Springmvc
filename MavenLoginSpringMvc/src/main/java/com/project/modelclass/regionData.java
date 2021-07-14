@@ -1,4 +1,4 @@
-package com.modelclass;
+package com.project.modelclass;
 
 public class regionData {
 

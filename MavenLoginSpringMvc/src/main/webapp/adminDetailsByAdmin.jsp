@@ -5,12 +5,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="css/last.css"/>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Dear ${username},  food items will be shipped soon to this  ${trace} </h1><%-- <%= request.getAttribute("trace") %>   --%> 
-
-</body>
-</html>
+<h1>Admin List</h1>  
+<table border="2" width="70%" cellpadding="2">  
+<tr><th>Name</th><th>password</th><th>Delete</th></tr>  
+   <c:forEach var="admin" items="${adminList}">   
+   <tr>    
+   <td>${admin.username}</td>  
+   <td>${admin.password}</td>   
+   <td><a href="DeleteAdmin/${admin.username}">Delete</a></td>  
+   </tr>  
+   </c:forEach>  
+   </table>  
+   <br/>

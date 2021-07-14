@@ -12,11 +12,8 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd
 ">
 <ctx:annotation-config></ctx:annotation-config>
 <ctx:component-scan base-package="com.project"></ctx:component-scan>
-
 <mvc:resources mapping="/css/**" location="/css/" />
 <mvc:annotation-driven/>
-
-
 <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
 <property name="url" value="jdbc:mysql://localhost:3306/myusers"/>
@@ -26,9 +23,14 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd
 <bean id="jdbctemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 <property name="dataSource" ref="ds"></property>
 </bean>
-<bean id="cdao" class="com.project.CustomerDao">
+<bean id="admindao" class="com.project.dao.AdminDao">
 <property name="jdbctemplate" ref="jdbctemplate"></property>
 </bean>
-
-<bean id="service" class="com.project.ServiceClass"/>
+<bean id="customerdao" class="com.project.dao.CustomerDao">
+<property name="jdbctemplate" ref="jdbctemplate"></property>
+</bean>
+<bean id="customerservice" class="com.project.customerservice.CustomerServiceLayer"/>
+<bean id="adminservice" class="com.project.adminservice.AdminServiceLayer"/>
 </beans>
+
+

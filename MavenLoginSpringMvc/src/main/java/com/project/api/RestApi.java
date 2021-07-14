@@ -1,4 +1,4 @@
-package com.api;
+package com.project.api;
 
 
 import java.util.List;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.modelclass.CovidReport;
+import com.project.modelclass.CovidReport;
 
 @RestController
 public class RestApi {

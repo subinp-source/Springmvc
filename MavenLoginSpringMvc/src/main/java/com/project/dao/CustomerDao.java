@@ -1,27 +1,29 @@
-package com.dao;
+package com.project.dao;
 import java.sql.PreparedStatement;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.modelclass.Cart;
-import com.modelclass.Cartlisting;
-import com.modelclass.Customer;
-import com.modelclass.Food;
-import com.modelclass.OrderDetails;
-import com.modelclass.Price;
+import com.project.modelclass.Cart;
+import com.project.modelclass.Cartlisting;
+import com.project.modelclass.Customer;
+import com.project.modelclass.Food;
+import com.project.modelclass.OrderDetails;
+import com.project.modelclass.Price;
 
 public class CustomerDao {
 	private JdbcTemplate jdbctemplate;
 	public void setJdbctemplate(JdbcTemplate jdbctemplate) {
 		this.jdbctemplate = jdbctemplate;
 	}
-	public List<Customer> getData(String username,String password){
+	public List<Customer> getCustomerData(String username,String password){
 		String query="select * from users where username='"+username+"' and password='"+password+"'";
 	return jdbctemplate.query(query,new RowMapper<Customer>(){ 
         public Customer mapRow(ResultSet rs, int row) throws SQLException {    
@@ -38,7 +40,7 @@ public class CustomerDao {
         });    
 }    
 	
-	    public  Boolean  saveEmployeeByPreparedStatement(final Customer customer){  
+	    public  Boolean  saveEmployeeByPreparedStatement(final Customer customer) throws SQLIntegrityConstraintViolationException,DuplicateKeyException{ 
 	    String query="insert into users(username,password,firstname,lastname,email,address,phone) values(?,?,?,?,?,?,?)";  
 	    return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
 	    public Boolean doInPreparedStatement(PreparedStatement ps)  
@@ -55,21 +57,12 @@ public class CustomerDao {
 	              
 	    }  
 	    }); 
+	    	
+	   
 	}  
 	    
 	    
-	    public List<Food> getFoodDetails(){    
-	        return jdbctemplate.query("select * from fooditem",new RowMapper<Food>(){    
-	            public Food mapRow(ResultSet resultset, int row) throws SQLException {    
-	                Food food=new Food(); 
-	                food.setFood_id(resultset.getInt("food_id"));
-	                food.setFood_item(resultset.getString("food_item"));    
-	                food.setFood_price(resultset.getInt("food_price"));    
-	                food.setFinal_quantity(resultset.getInt("final_quantity"));
-	                return food;    
-	            }    
-	        });    
-	    }
+	   
 	    
 
 	public int updateFood(int Count,int food_id) {
