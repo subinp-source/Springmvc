@@ -8,7 +8,7 @@
 <title>Insert title here</title><link rel="stylesheet" type="text/css" href="css/restaurant.css"/>
 </head>
 <body> <h2>
- <c:forEach var="food" items="${list}">
+ <c:forEach var="food" items="${Foodlist}">
         ${food.food_item} Rs.${food.food_price} 
         <form action="/MavenLoginSpringMvc/booking/${food.food_id}/${food.food_item}/${username}/${customer_id}" >
         <input type="text" name="count" value="${value}"  id="count">

@@ -9,10 +9,12 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.ui.Model;
 
 import com.project.modelclass.Admin;
 import com.project.modelclass.Customer;
 import com.project.modelclass.Food;
+import com.project.modelclass.OrderDetails;
 
 public class AdminDao {
 	
@@ -159,15 +161,33 @@ public class AdminDao {
 	}
 
 
+	public int changeprice(int price, int food_id) {
+		
+		 String sql="update fooditem set food_price="+price+" where food_id="+food_id;    
+		    return jdbctemplate.update(sql);
+	}
 
-
+	
+	public List<OrderDetails> getOrderDetails() {   
+        return jdbctemplate.query("select * from  o_details",new RowMapper<OrderDetails>(){    
+            public OrderDetails mapRow(ResultSet resultset, int row) throws SQLException {    
+            	OrderDetails details=new OrderDetails(); 
+                details.setFood_id(resultset.getInt("food_id"));
+                details.setCustomer_id(resultset.getInt("customer_id"));    
+                details.setOrder_quantity(resultset.getInt("order_quantity"));    
+                
+                return details;    
+            }    
+        });    
+	}
 	
 	
 	
-	
-	
-	
-	
+	public int updatefoodcount(int foodcount,int food_id) {
+		
+		 String sql="update fooditem set final_quantity=final_quantity+"+foodcount+" where food_id="+food_id;    
+		    return jdbctemplate.update(sql);
+	}
 	
 	
 	

@@ -10,9 +10,9 @@
 <title>Insert title here</title>
 </head>
 <body>
- welcome:  ${customer.username}         <%--  <%= request.getAttribute("customer")  %> --%>
+ welcome:  ${username}         <%--  <%= request.getAttribute("customer")  %> --%>
  <h2>you can now select the restaurant show below.</h2><br>
- <h3>Alibaba restaurant :</h3><form action="detail/${customer.username}/${customer.customer_id}" ><input type="submit" value="click here">
+ <h3>Alibaba restaurant :</h3><form action="/MavenLoginSpringMvc/detail/${username}/${customer_id}" ><input type="submit" value="click here">
  </form>
 <!--   <form action="something">
  <input type="submit" 

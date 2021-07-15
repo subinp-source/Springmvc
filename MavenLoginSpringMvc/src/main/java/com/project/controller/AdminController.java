@@ -7,6 +7,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.RowMapper;
@@ -17,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.adminservice.AdminServiceLayer;
 import com.project.dao.AdminDao;
 import com.project.modelclass.Admin;
 import com.project.modelclass.Customer;
 import com.project.modelclass.OrderDetails;
+import com.project.servicelayer.AdminServiceLayer;
 
 @Controller
 public class AdminController {
@@ -46,7 +48,7 @@ public class AdminController {
 		return "addfood.jsp";*/
 	}
 	
-	@RequestMapping("/inputAdmin")
+	@RequestMapping(value="/inputAdmin",method=RequestMethod.POST)
 	public String addAdmin(HttpServletRequest request) {
 		try {
 		/*String username = request.getParameter("usernameOfAdmin");
@@ -80,7 +82,7 @@ public class AdminController {
 		return "Adduser.jsp";
 	}
 	
-	@RequestMapping("/userRegistrationByAdmin")
+	@RequestMapping(value="/userRegistrationByAdmin",method=RequestMethod.POST)
 	public String UserRegistrationByAdmin(HttpServletRequest request) {
 		try {
 		return adminservice.registerByUser(request);
@@ -135,4 +137,100 @@ public class AdminController {
 		return "adminDetailsByAdmin.jsp";
 	}
 	
+	
+	
+	
+	
+	@RequestMapping("/changeprice")
+	public String changeprice(Model m) {
+		return adminservice.changePrice(m);
+		/*List<Food> list2 = dao.getFoodDetails();
+		m.addAttribute("list1",list2);
+		return "pricechange.jsp";*/
+	}
+	
+	
+	@RequestMapping("/pricechange/{food_id}")
+	public String pricechange(@PathVariable int food_id, HttpServletRequest request, HttpServletResponse response) {
+		
+		int price = Integer.parseInt(request.getParameter("price"));
+		admindao.changeprice(price,food_id);
+		return "redirect:/changeprice";
+		
+	}
+	
+	
+	
+
+        @RequestMapping("/orderdetails")
+    	public String vieworder(Model m) {
+    		return adminservice.viewOrder(m);
+    		/*List<OrderDetails> list = admindao.getOrderDetails();
+    		m.addAttribute("list",list);
+    		return "order.jsp";*/
+    	}
+        
+        
+        
+        @RequestMapping("/updatingfood/{food_id}")
+    	public String updatefood(@PathVariable int food_id, HttpServletRequest request, HttpServletResponse response) {
+    		int foodcount = Integer.parseInt(request.getParameter("count"));
+    		admindao.updatefoodcount(foodcount,food_id);
+    		return "redirect:/addfood";
+    	}
+        
+        
+        
+        
+        
+        
+        
+        
+
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+

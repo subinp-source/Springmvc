@@ -13,7 +13,7 @@
 <h1>Order Details List</h1>  
 <table border="2" width="70%" cellpadding="2">  
 <tr><th>Customer Id</th><th>Food id</th><th>Quantity</th></tr>  
-   <c:forEach var="details" items="${list}">   
+   <c:forEach var="details" items="${OrderFoodList}">   
    <tr>  
    <td>${details.customer_id}</td>  
    <td>${details.food_id}</td>  

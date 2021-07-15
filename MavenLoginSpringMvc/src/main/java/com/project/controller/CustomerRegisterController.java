@@ -10,26 +10,18 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.project.customerservice.CustomerServiceLayer;
 import com.project.dao.AdminDao;
 import com.project.dao.CustomerDao;
 import com.project.modelclass.Cart;
 import com.project.modelclass.Cartlisting;
 import com.project.modelclass.Customer;
+import com.project.servicelayer.CustomerServiceLayer;
 
 
 @Controller
 public class CustomerRegisterController {
-	@Autowired
-	CustomerDao dao;
-    Customer customer;
     @Autowired
     CustomerServiceLayer customerservice; 
-    int sum ;List<Cartlisting> listing;
-    List<Cart> cart;
-    
-    @Autowired
-    AdminDao admindao;
 	
 	@RequestMapping("/registerprocess")
 	public String registerprocess(HttpServletRequest request) {

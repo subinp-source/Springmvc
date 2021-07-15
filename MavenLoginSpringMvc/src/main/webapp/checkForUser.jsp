@@ -16,7 +16,7 @@ Enter passcode,if you are a admin,
 or,go to booking page by clicking below..
 
 
-<form action="GotoWelcomePage/${customerName}">
+<form action="GotoWelcomePage/${customer.username}/${customer.customer_id}">
 <input type="submit" value="Go">
 </form><br>
 

@@ -10,12 +10,15 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.modelclass.Cart;
 import com.project.modelclass.Cartlisting;
 import com.project.modelclass.Customer;
 import com.project.modelclass.Food;
+import com.project.modelclass.FoodCart;
 import com.project.modelclass.OrderDetails;
+import com.project.modelclass.OutOfStock;
 import com.project.modelclass.Price;
 
 public class CustomerDao {
@@ -72,17 +75,6 @@ public class CustomerDao {
 	}
 	
 	
-	public int updatefoodcount(int foodcount,int food_id) {
-		
-		 String sql="update fooditem set final_quantity=final_quantity+"+foodcount+" where food_id="+food_id;    
-		    return jdbctemplate.update(sql);
-	}
-	
-	
-	
-	
-	
-	
 	public List<Price> price(int food_id) {
 		 return (List<Price>) jdbctemplate.query("select food_price from fooditem where food_id="+food_id,new RowMapper<Price>(){    
 	            public Price mapRow(ResultSet resultset, int row) throws SQLException {    
@@ -92,70 +84,20 @@ public class CustomerDao {
 	            }    
 	        }); 
 	}
-	public int changeprice(int price, int food_id) {
-		
-		 String sql="update fooditem set food_price="+price+" where food_id="+food_id;    
-		    return jdbctemplate.update(sql);
-	}
 	
 	
 	
 	
 	
 	
-	public List<OrderDetails> getOrderDetails() {   
-		        return jdbctemplate.query("select * from  o_details",new RowMapper<OrderDetails>(){    
-		            public OrderDetails mapRow(ResultSet resultset, int row) throws SQLException {    
-		            	OrderDetails details=new OrderDetails(); 
-		                details.setFood_id(resultset.getInt("food_id"));
-		                details.setCustomer_id(resultset.getInt("customer_id"));    
-		                details.setOrder_quantity(resultset.getInt("order_quantity"));    
-		                
-		                return details;    
-		            }    
-		        });    
-		    
-		
-		
-		
-	}
+	
+
 	public int updateorder(int food_id, int id, int value) {
 			
 			String sql="insert into o_details(customer_id,food_id,order_quantity) values("+id+","+food_id+","+value+")";    
 		    return jdbctemplate.update(sql);	
 		
 	}
-	/*
-	 * public int insertorderfunction(int id, String food_item, int value) {
-	 * 
-	 * String
-	 * sql="insert into user_order(customer_id,food_item,order_quantity) values("+id
-	 * +","+"'"+food_item+"'"+","+value+")"; return jdbctemplate.update(sql);
-	 * 
-	 * }
-	 * 
-	 * public List<UserOrder> getUserOrders(int userid) { String
-	 * query="select * from user_order where customer_id='"+userid+"'"; return
-	 * jdbctemplate.query(query,new RowMapper<UserOrder>(){ public UserOrder
-	 * mapRow(ResultSet rs, int row) throws SQLException { UserOrder userorder=new
-	 * UserOrder(); userorder.setCustomer_id(rs.getInt("customer_id"));
-	 * userorder.setFood_item(rs.getString("food_item"));
-	 * userorder.setOrder_quantity(rs.getInt("order_quantity"));
-	 * 
-	 * return userorder;} }); }
-	 */
-	
-	
-	
-	/*public Cart cart(int id, String food_item, int value) {
-		Cart cart =new Cart();
-		cart.setCustomer_id(id);
-		cart.setFood_item(food_item);
-		cart.setOrder_quantity(value);
-		//@SuppressWarnings("unchecked")
-		//List<Cart> carts=(List<Cart>) cart;
-		return cart;
-	}*/
 	
 	public int updatetablevalues(String food_item, int id, int value) {
 		String sql="insert into temp(customer_id,food_item,order_quantity) values("+id+","+"'"+food_item+"'"+","+value+")";    
@@ -199,12 +141,128 @@ public class CustomerDao {
 			  return cartlisting;} });
 		
 	}
-	public int emptycart() {
+	/*public int emptycart() {
 		
-		String sql="TRUNCATE TABLE cartlisting";    
+		String sql="TRUNCATE TABLE foodcart";    
 	    return jdbctemplate.update(sql);
+	}*/
+	
+	
+	
+	
+	public int updateFoodCart(int value, String food_item) {
+		
+		 String sql="update foodcart set quantity=quantity+"+value+" where food_item="+"'"+food_item+"'";    
+		    return jdbctemplate.update(sql);
+		
 	}
-}	  
+	public int sumAdditionToCartTable(int Initialsum, String food_item) {
+		
+		 String sql="update foodcart set sum=sum+"+Initialsum+" where food_item="+"'"+food_item+"'";    
+		    return jdbctemplate.update(sql);
+		
+	}
+	public List<FoodCart> getFoodCartTable() {
+		
+		 return (List<FoodCart>) jdbctemplate.query("select * from foodcart",new RowMapper<FoodCart>(){    
+	            public FoodCart mapRow(ResultSet resultset, int row) throws SQLException {    
+	                FoodCart foodcart=new FoodCart();
+	                foodcart.setFood_item(resultset.getString("food_item")); 
+	                foodcart.setQuantity(resultset.getInt("quantity")); 
+	                foodcart.setSum(resultset.getInt("sum"));
+	                return foodcart;    
+	            }    
+	        }); 
+		
+	}
+	
+	
+	
+	
+	public int deleteTableFoodcartQuantityDosa() {
+		
+
+		 String sql="update foodcart set quantity="+0+" where food_id="+"'"+1+"'";    
+		    return jdbctemplate.update(sql);
+		
+	}
+	
+	public int deleteTableFoodcartQuantityChapathi() {
+		
+
+		 String sql="update foodcart set quantity="+0+" where food_id="+"'"+2+"'";    
+		    return jdbctemplate.update(sql);
+		
+	}
+	
+	public int deleteTableFoodcartQuantityBeefRoast() {
+		
+
+		 String sql="update foodcart set quantity="+0+" where food_id="+"'"+3+"'";    
+		    return jdbctemplate.update(sql);
+		
+	}
+	
+	public int deleteTableFoodcartSumBeefRoast() {
+		
+
+		 String sql="update foodcart set sum="+0+" where food_id="+"'"+3+"'";    
+		    return jdbctemplate.update(sql);
+		
+	}
+	
+	public int deleteTableFoodcartSumChapathi() {
+		
+
+		 String sql="update foodcart set sum="+0+" where food_id="+"'"+2+"'";    
+		    return jdbctemplate.update(sql);
+		
+	}
+	
+	
+	public int deleteTableFoodcartSumDosa() {
+		
+
+		 String sql="update foodcart set sum="+0+" where food_id="+"'"+1+"'";    
+		    return jdbctemplate.update(sql);
+		
+	}
+	
+	
+	
+	public List<OutOfStock> stockquantitychecker(int food_id) {
+		
+		
+		 return (List<OutOfStock>) jdbctemplate.query("select * from fooditem where food_id="+food_id,new RowMapper<OutOfStock>(){    
+	            public OutOfStock mapRow(ResultSet resultset, int row) throws SQLException {    
+	            	OutOfStock outofstock=new OutOfStock();
+	            	outofstock.setQuantity(resultset.getInt("final_quantity")); 
+	                return outofstock;    
+	            }    
+	        }); 
+		
+		
+	}
+	public int checker(int value, int quantity) {
+		//ModelAndView modelandview =new ModelAndView();
+		//modelandview.setViewName("outofstock.jsp");
+		if(value>quantity) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+}	
+
+
 	
 	
 	

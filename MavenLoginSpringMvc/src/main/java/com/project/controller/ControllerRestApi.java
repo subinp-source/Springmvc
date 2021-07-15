@@ -9,17 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.dao.AdminDao;
 import com.project.dao.CustomerDao;
 import com.project.modelclass.OrderDetails;
 
 @RestController
 public class ControllerRestApi {
 	@Autowired
-	CustomerDao dao;
+	AdminDao admindao;
 	
 	@RequestMapping(value = "foodBooking", method = RequestMethod.GET)
     public ResponseEntity<List<OrderDetails>> listAllUsers() {
-        List<OrderDetails> users =dao.getOrderDetails();
+        List<OrderDetails> users =admindao.getOrderDetails();
         if(users.isEmpty()){
             return new ResponseEntity<List<OrderDetails>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
         }

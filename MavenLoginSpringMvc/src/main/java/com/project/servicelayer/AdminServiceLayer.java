@@ -1,4 +1,4 @@
-package com.project.adminservice;
+package com.project.servicelayer;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import com.project.dao.AdminDao;
 import com.project.modelclass.Cartlisting;
 import com.project.modelclass.Customer;
 import com.project.modelclass.Food;
+import com.project.modelclass.OrderDetails;
 
 public class AdminServiceLayer {
 	
@@ -20,13 +21,10 @@ public class AdminServiceLayer {
 	
 	
 	public String addfood(Model m) {
-		try {
-		List<Food> list1 = admindao.getFoodDetails();
-		m.addAttribute("list1",list1);
-		}
-		catch(Exception e) { 
-			System.out.println("hai");
-		}return "addfood.jsp";
+	
+		List<Food> FoodDetailsList = admindao.getFoodDetails();
+		m.addAttribute("FoodDetailsList",FoodDetailsList);
+		return "addfood.jsp";
 	}
 	
 	
@@ -76,6 +74,19 @@ public String insertAdminservice(HttpServletRequest request) {
 }
 	
 	
+
+public String viewOrder(Model m) {
+	List<OrderDetails> OrderFoodList = admindao.getOrderDetails();
+	m.addAttribute("OrderFoodList",OrderFoodList);
+	return "order.jsp";
+}
+
+
+
+
+
+
+
 	
 	
 }

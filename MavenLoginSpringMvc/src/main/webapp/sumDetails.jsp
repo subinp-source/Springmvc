@@ -12,12 +12,12 @@ dear ${name},
 
 <h1>Order Details List</h1>  
  <table border="2" width="70%" cellpadding="2">  
-<tr><th>food item</th><th>quantity</th></tr>  
+<tr><th>food item</th><th>quantity</th><th>sum</th></tr>  
    <c:forEach var="cart" items="${items}">   
    <tr>  
    <td>${cart.food_item}</td>  
-   <td>${cart.order_quantity}</td>  
-       
+   <td>${cart.quantity}</td>  
+   <td>${cart.sum}</td>
    </tr>  
    </c:forEach>  
    </table>  
@@ -28,7 +28,7 @@ dear ${name},
    <h2>Shipping Address</h2>
  <form action="/MavenLoginSpringMvc/shipping/${username}">
    <input type="text" name="address">
-   <input type="submit" value="change">
+   <input type="submit" value="confirm order">
    </form><br> 
    
 <form action="back">
