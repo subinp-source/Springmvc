@@ -11,7 +11,7 @@
  <c:forEach var="food" items="${Foodlist}">
         ${food.food_item} Rs.${food.food_price} 
         <form action="/MavenLoginSpringMvc/booking/${food.food_id}/${food.food_item}/${username}/${customer_id}" >
-        <input type="text" name="count" value="${value}"  id="count">
+        <input type="text" name="count"   id="count" required>
         <input type="submit" value="add" ><br><br>
    </form>
    </c:forEach><br></h2>

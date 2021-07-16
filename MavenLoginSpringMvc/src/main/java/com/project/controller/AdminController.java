@@ -51,9 +51,6 @@ public class AdminController {
 	@RequestMapping(value="/inputAdmin",method=RequestMethod.POST)
 	public String addAdmin(HttpServletRequest request) {
 		try {
-		/*String username = request.getParameter("usernameOfAdmin");
-		String password = request.getParameter("passwordOfAdmin");
-		admindao.insertAdminDetails(username,password);*/
 		return adminservice.insertAdminservice(request);
 		}
 		catch(DuplicateKeyException duplicatekey) {
@@ -68,7 +65,6 @@ public class AdminController {
 	@RequestMapping(value="/passcode")
 	public String passcodeChecker(HttpServletRequest request) {
 		int passcode=Integer.parseInt(request.getParameter("passcode"));
-		//service.passcodeChecking(passcode);
 		if(passcode==123) {
 			return "/admin.jsp";
 		}else {

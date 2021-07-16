@@ -30,6 +30,9 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 </bean>
 <bean id="customerservice" class="com.project.servicelayer.CustomerServiceLayer"/>
 <bean id="adminservice" class="com.project.servicelayer.AdminServiceLayer"/>
+<bean id="customerdaoalibaba" class="com.project.dao.CustomerDaoAlibabaRestaurant">
+<property name="jdbctemplate" ref="jdbctemplate"></property>
+</bean>
 </beans>
 
 

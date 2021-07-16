@@ -8,10 +8,10 @@
 </head>
 <body>
 <form action="inputAdmin">
-<input type="text" name="usernameOfAdmin">
-<input type="text" name="passwordOfAdmin">
+Username<input type="text" name="usernameOfAdmin" required><br><br>
+password<input type="text" name="passwordOfAdmin" required><br><br>
 <input type="submit" value="addadmin">
-</form>
+</form><br>
 <a href="admin.jsp">Go back</a>
 </body>
 </html>

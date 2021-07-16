@@ -15,7 +15,11 @@ import com.project.dao.CustomerDao;
 import com.project.modelclass.Admin;
 import com.project.modelclass.Cartlisting;
 import com.project.modelclass.Customer;
+import com.project.modelclass.Food;
+import com.project.modelclass.FoodCart;
 import com.project.modelclass.OrderDetails;
+import com.project.modelclass.OutOfStock;
+import com.project.modelclass.Price;
 
 public class CustomerServiceLayer {
 
@@ -37,7 +41,7 @@ public class CustomerServiceLayer {
 		customer.setEmail(request.getParameter("email"));
 		customer.setAddress(request.getParameter("address"));
 		customer.setPhone(request.getParameter("phone"));
-		customerdao.saveEmployeeByPreparedStatement(customer);
+		customerdao.saveCustomerDetails(customer);
 		
 		return "success.jsp";
 		
@@ -72,7 +76,7 @@ public class CustomerServiceLayer {
 				modelAndView.addObject("username",customer.getUsername());
 				modelAndView.addObject("customer_id",customer.getCustomer_id());
 				//customerdao.emptycart();
-				modelAndView.setViewName("welcome.jsp");
+				modelAndView.setViewName("MultipleRestaurant.jsp");
 				return modelAndView;
 			}
 	    	
@@ -100,6 +104,82 @@ public class CustomerServiceLayer {
 	    }	
 		
 	}
+	
+	
+	
+
+
+
+	public ModelAndView viewFood(int sum,String username,int customer_id) {
+		ModelAndView modelandview = new ModelAndView();
+		List<Food> Foodlist = admindao.getFoodDetails();
+		modelandview.addObject("username",username);
+		modelandview.addObject("customer_id",customer_id);
+		modelandview.addObject("Foodlist",Foodlist);
+		modelandview.setViewName("/restaurant.jsp");
+		modelandview.addObject("sum",sum);
+		return modelandview;
+	}
+
+
+
+	public ModelAndView summationService(int sum, String username) {
+		ModelAndView modelandview =new ModelAndView();
+		modelandview.addObject("name",username);
+		modelandview.addObject("sum", sum);
+		List<FoodCart> Foodcart=customerdao.getFoodCartTable();
+		modelandview.addObject("items",Foodcart);
+		modelandview.setViewName("/sumDetails.jsp");
+		return modelandview;
+		
+	}
+
+
+
+	public ModelAndView shippingaddress(HttpServletRequest request, String username) {
+		ModelAndView modelandview =new ModelAndView();
+		 modelandview.addObject("trace",request.getParameter("address"));
+		  modelandview.addObject("user",username);
+		  modelandview.setViewName("/final.jsp");
+	      return modelandview;
+		
+		
+		
+	}
+
+
+
+	/*public ModelAndView booking(int sum, String username, int customer_id, HttpServletRequest request,int food_id,String food_item) {
+		ModelAndView modelandview =new ModelAndView();
+		int Initialsum=0;OutOfStock outofstocks=new OutOfStock();
+		 int value=Integer.parseInt(request.getParameter("count"));
+	  List<OutOfStock> outofstockList =customerdao.stockquantitychecker(food_id);
+	  outofstocks=outofstockList.get(0);
+	  int id = customer_id;
+	  int quantity=outofstocks.getQuantity();
+	  int flag=customerdao.checker(value,quantity);
+	  customerdao.updateFood(value,food_id);
+	  customerdao.updateFoodCart(value,food_item);
+	  List<Price> accept=customerdao.price(food_id);
+	  modelandview.addObject("username",username);
+		modelandview.addObject("customer_id",customer_id);
+	  for (Price price : accept) {
+	   Initialsum=Initialsum+(price.getEach_price()*value);
+	  }
+	  customerdao.sumAdditionToCartTable(Initialsum,food_item);
+	  sum=sum+Initialsum;
+	  customerdao.updateorder(food_id,id,value);
+	  modelandview.setViewName("redirect:http://localhost:8080/MavenLoginSpringMvc/detail/{username}/{customer_id}");
+		  customerdao.updatetablevalues(food_item,id,value); 
+		  if(flag==1) {
+		  modelandview.setViewName("./outofstock.jsp");
+				return modelandview;
+			}
+		  return modelandview;
+	}*/
+	
+	
+	
 	
 }	    
 

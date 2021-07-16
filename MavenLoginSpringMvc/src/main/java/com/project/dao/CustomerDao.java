@@ -23,6 +23,7 @@ import com.project.modelclass.Price;
 
 public class CustomerDao {
 	private JdbcTemplate jdbctemplate;
+	
 	public void setJdbctemplate(JdbcTemplate jdbctemplate) {
 		this.jdbctemplate = jdbctemplate;
 	}
@@ -43,7 +44,7 @@ public class CustomerDao {
         });    
 }    
 	
-	    public  Boolean  saveEmployeeByPreparedStatement(final Customer customer) throws SQLIntegrityConstraintViolationException,DuplicateKeyException{ 
+	    public  Boolean  saveCustomerDetails(final Customer customer) throws SQLIntegrityConstraintViolationException,DuplicateKeyException{ 
 	    String query="insert into users(username,password,firstname,lastname,email,address,phone) values(?,?,?,?,?,?,?)";  
 	    return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
 	    public Boolean doInPreparedStatement(PreparedStatement ps)  
@@ -64,9 +65,6 @@ public class CustomerDao {
 	   
 	}  
 	    
-	    
-	   
-	    
 
 	public int updateFood(int Count,int food_id) {
 		  String sql="update fooditem set final_quantity=final_quantity-"+Count+" where food_id="+food_id;    
@@ -84,17 +82,10 @@ public class CustomerDao {
 	            }    
 	        }); 
 	}
-	
-	
-	
-	
-	
-	
-	
 
 	public int updateorder(int food_id, int id, int value) {
 			
-			String sql="insert into o_details(customer_id,food_id,order_quantity) values("+id+","+food_id+","+value+")";    
+			String sql="insert into order_details(customer_id,food_id,order_quantity) values("+id+","+food_id+","+value+")";    
 		    return jdbctemplate.update(sql);	
 		
 	}
@@ -104,51 +95,12 @@ public class CustomerDao {
 	    return jdbctemplate.update(sql);
 		
 	}
-	public List<Cart> getTablevalues(int id) {
-		
-		String  query="select * from temp where customer_id='"+id+"'"; 
-		return jdbctemplate.query(query,new RowMapper<Cart>(){
-			
-				  public Cart mapRow(ResultSet rs, int row) throws SQLException {
-					  Cart cart=new Cart(); 
-					  cart.setCustomer_id(rs.getInt("customer_id"));
-					  cart.setFood_item(rs.getString("food_item"));
-					  cart.setOrder_quantity(rs.getInt("order_quantity"));
-			  
-			  return cart;} }); }
-	
-	
 	
 	public int emptyTable() {
 		String sql="TRUNCATE TABLE temp";    
 	    return jdbctemplate.update(sql);
 		
 	}
-	public int updatecartlisting(int id,int value, String food_item) {
-		String sql="insert into cartlisting(customer_id,food_item,quantity) values("+id+","+"'"+food_item+"'"+","+value+")";    
-	    return jdbctemplate.update(sql);
-		
-	}
-	public List<Cartlisting> makelist() {
-		String  query="select * from cartlisting"; 
-		return jdbctemplate.query(query,new RowMapper<Cartlisting>(){
-			
-				  public Cartlisting mapRow(ResultSet rs, int row) throws SQLException {
-					  Cartlisting cartlisting=new Cartlisting(); 
-					  cartlisting.setFood_item(rs.getString("food_item"));
-					  cartlisting.setQuantity(rs.getInt("quantity"));
-			  
-			  return cartlisting;} });
-		
-	}
-	/*public int emptycart() {
-		
-		String sql="TRUNCATE TABLE foodcart";    
-	    return jdbctemplate.update(sql);
-	}*/
-	
-	
-	
 	
 	public int updateFoodCart(int value, String food_item) {
 		
@@ -243,22 +195,15 @@ public class CustomerDao {
 		
 		
 	}
-	public int checker(int value, int quantity) {
-		//ModelAndView modelandview =new ModelAndView();
-		//modelandview.setViewName("outofstock.jsp");
-		if(value>quantity) {
+
+	
+	public int checker(int quantity) {
+		if(quantity==0) {
 			return 1;
 		}else {
 			return 0;
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 }	
 

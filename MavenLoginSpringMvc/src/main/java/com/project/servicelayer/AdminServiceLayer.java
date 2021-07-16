@@ -30,15 +30,15 @@ public class AdminServiceLayer {
 	
 public String changePrice(Model m) {
 		
-		List<Food> list2 = admindao.getFoodDetails();
-		m.addAttribute("list1",list2);
+		List<Food> FoodList = admindao.getFoodDetails();
+		m.addAttribute("list1",FoodList);
 		return "pricechange.jsp";
 	}
 
 
 public String viewFood(Model m,int sum,List<Cartlisting> listing) {
-	List<Food> list = admindao.getFoodDetails();
-	m.addAttribute("list",list);
+	List<Food> FoodList = admindao.getFoodDetails();
+	m.addAttribute("list",FoodList);
 	m.addAttribute("sum",sum);
 	m.addAttribute("listing",listing);
 	return "restaurant.jsp";

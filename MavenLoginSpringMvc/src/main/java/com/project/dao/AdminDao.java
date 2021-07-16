@@ -169,7 +169,7 @@ public class AdminDao {
 
 	
 	public List<OrderDetails> getOrderDetails() {   
-        return jdbctemplate.query("select * from  o_details",new RowMapper<OrderDetails>(){    
+        return jdbctemplate.query("select * from  order_details",new RowMapper<OrderDetails>(){    
             public OrderDetails mapRow(ResultSet resultset, int row) throws SQLException {    
             	OrderDetails details=new OrderDetails(); 
                 details.setFood_id(resultset.getInt("food_id"));
