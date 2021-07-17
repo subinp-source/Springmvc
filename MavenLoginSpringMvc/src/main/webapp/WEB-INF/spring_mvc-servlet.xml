@@ -33,6 +33,9 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 <bean id="customerdaoalibaba" class="com.project.dao.CustomerDaoAlibabaRestaurant">
 <property name="jdbctemplate" ref="jdbctemplate"></property>
 </bean>
+<bean id="customerdaoazheekal" class="com.project.dao.CustomerDaoAzheekalRestaurant">
+<property name="jdbctemplate" ref="jdbctemplate"></property>
+</bean>
 </beans>
 
 

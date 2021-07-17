@@ -7,9 +7,9 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.project.modelclass.FoodCart;
+import com.project.modelclass.FoodCartAzheekal;
 import com.project.modelclass.FoodCartAlibaba;
-import com.project.modelclass.FoodListOfAlibaba;
+import com.project.modelclass.FoodListOfRestaurant;
 import com.project.modelclass.Price;
 
 public class CustomerDaoAlibabaRestaurant {
@@ -18,11 +18,11 @@ private JdbcTemplate jdbctemplate;
 	public void setJdbctemplate(JdbcTemplate jdbctemplate) {
 		this.jdbctemplate = jdbctemplate;
 	}
-	public List<FoodListOfAlibaba> LoadFoodDetails(String foodlist) {
+	public List<FoodListOfRestaurant> LoadFoodDetails(String foodlist) {
 		
-		 return (List<FoodListOfAlibaba>) jdbctemplate.query("select * from "+foodlist,new RowMapper<FoodListOfAlibaba>(){    
-	            public FoodListOfAlibaba mapRow(ResultSet resultset, int row) throws SQLException {    
-	            	FoodListOfAlibaba foodlistofalibaba=new FoodListOfAlibaba();
+		 return (List<FoodListOfRestaurant>) jdbctemplate.query("select * from "+foodlist,new RowMapper<FoodListOfRestaurant>(){    
+	            public FoodListOfRestaurant mapRow(ResultSet resultset, int row) throws SQLException {    
+	            	FoodListOfRestaurant foodlistofalibaba=new FoodListOfRestaurant();
 	            	foodlistofalibaba.setFood_id(resultset.getInt("food_id"));
 	            	foodlistofalibaba.setFood_price(resultset.getInt("food_price"));
 	            	foodlistofalibaba.setFood_item(resultset.getString("food_item"));

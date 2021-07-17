@@ -16,7 +16,7 @@ import com.project.modelclass.Cart;
 import com.project.modelclass.Cartlisting;
 import com.project.modelclass.Customer;
 import com.project.modelclass.Food;
-import com.project.modelclass.FoodCart;
+import com.project.modelclass.FoodCartAzheekal;
 import com.project.modelclass.OrderDetails;
 import com.project.modelclass.OutOfStock;
 import com.project.modelclass.Price;
@@ -114,11 +114,11 @@ public class CustomerDao {
 		    return jdbctemplate.update(sql);
 		
 	}
-	public List<FoodCart> getFoodCartTable() {
+	public List<FoodCartAzheekal> getFoodCartTable() {
 		
-		 return (List<FoodCart>) jdbctemplate.query("select * from foodcart",new RowMapper<FoodCart>(){    
-	            public FoodCart mapRow(ResultSet resultset, int row) throws SQLException {    
-	                FoodCart foodcart=new FoodCart();
+		 return (List<FoodCartAzheekal>) jdbctemplate.query("select * from foodcart",new RowMapper<FoodCartAzheekal>(){    
+	            public FoodCartAzheekal mapRow(ResultSet resultset, int row) throws SQLException {    
+	                FoodCartAzheekal foodcart=new FoodCartAzheekal();
 	                foodcart.setFood_item(resultset.getString("food_item")); 
 	                foodcart.setQuantity(resultset.getInt("quantity")); 
 	                foodcart.setSum(resultset.getInt("sum"));

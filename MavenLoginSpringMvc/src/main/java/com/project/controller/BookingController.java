@@ -18,7 +18,7 @@ import com.project.modelclass.Cart;
 import com.project.modelclass.Cartlisting;
 import com.project.modelclass.Customer;
 import com.project.modelclass.Food;
-import com.project.modelclass.FoodCart;
+import com.project.modelclass.FoodCartAzheekal;
 import com.project.modelclass.OutOfStock;
 import com.project.modelclass.Price;
 import com.project.servicelayer.CustomerServiceLayer;

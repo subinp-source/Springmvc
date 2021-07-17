@@ -26,7 +26,7 @@ dear ${username},
    <br/><br>
    you cost Rs.${sum} for this order.<br><br>
    <h2>Shipping Address</h2>
- <form action="shipping">
+ <form action="shippingAzheekal">
  <input hidden="text" name="username" value="${username}"/>
    <input type="text" name="address" required>
    <input type="submit" value="confirm order">

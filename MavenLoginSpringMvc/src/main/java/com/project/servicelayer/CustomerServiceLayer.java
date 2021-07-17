@@ -16,7 +16,7 @@ import com.project.modelclass.Admin;
 import com.project.modelclass.Cartlisting;
 import com.project.modelclass.Customer;
 import com.project.modelclass.Food;
-import com.project.modelclass.FoodCart;
+import com.project.modelclass.FoodCartAzheekal;
 import com.project.modelclass.OrderDetails;
 import com.project.modelclass.OutOfStock;
 import com.project.modelclass.Price;
@@ -127,7 +127,7 @@ public class CustomerServiceLayer {
 		ModelAndView modelandview =new ModelAndView();
 		modelandview.addObject("name",username);
 		modelandview.addObject("sum", sum);
-		List<FoodCart> Foodcart=customerdao.getFoodCartTable();
+		List<FoodCartAzheekal> Foodcart=customerdao.getFoodCartTable();
 		modelandview.addObject("items",Foodcart);
 		modelandview.setViewName("/sumDetails.jsp");
 		return modelandview;

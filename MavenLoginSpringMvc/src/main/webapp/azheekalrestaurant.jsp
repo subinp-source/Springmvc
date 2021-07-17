@@ -9,21 +9,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:forEach var="foodlistofalibaba" items="${listOfFood}">
-        ${foodlistofalibaba.food_item} Rs.${foodlistofalibaba.food_price} 
-        <form action="Alibabarestaurantbooking" >
+<c:forEach var="foodlistofazheekal" items="${listOfFood}">
+        ${foodlistofazheekal.food_item} Rs.${foodlistofazheekal.food_price} 
+        <form action="Azheekalrestaurantbooking" >
         <input hidden="text" name="foodlist" value="${foodlist}"/>
         <input hidden="text" name="customer_id"  value="${customer_id}"/>
         <input hidden="text" name="username"  value="${username}"/>
-        <input hidden="text" name="food_id"  value="${foodlistofalibaba.food_id}"/>
-         <input hidden="text" name="food_price"  value="${foodlistofalibaba.food_price}"/>
-        <input hidden="text" name="food_item"  value="${foodlistofalibaba.food_item}"/>
+        <input hidden="text" name="food_id"  value="${foodlistofazheekal.food_id}"/>
+         <input hidden="text" name="food_price"  value="${foodlistofazheekal.food_price}"/>
+        <input hidden="text" name="food_item"  value="${foodlistofazheekal.food_item}"/>
         <input type="text" name="count"   id="count" required>
         <input type="submit" value="add" ><br><br>
    </form>
    </c:forEach><br></h2>
    
-   <h2><form action="summationalibaba">
+   <h2><form action="summationazheekal">
    <input hidden="text" name="sum"  value="${sum}"/>
    <input hidden="text" name="foodlist"  value="${foodlist}"/>
      <input hidden="text" name="customer_id"  value="${customer_id}"/>

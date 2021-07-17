@@ -9,13 +9,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-welcome,${username}<br>
+
+welcome,${username}<br><br>
+
+
 1.Alibaba Restaurant:<form action="AlibabaRestaurant">
 <input hidden="text" name="customer_id"  value="${customer_id}"/>
 <input hidden="text" name="username"  value="${username}"/>
-<input type="submit" value="go"><br>
-1.Azheekal Restaurant:<form action="AzheekalRestaurant">
-<input type="submit" value="go"><br>
+<input type="submit" value="go to alibaba"></form><br><br>
+
+
+
+2.Azheekal Restaurant:<form action="AzheekalRestaurant">
+<input hidden="text" name="customer_id"  value="${customer_id}"/>
+<input hidden="text" name="username"  value="${username}"/>
+<input type="submit" value="go to azheekal"><br>
 </form>
 </body>
 </html>
