@@ -72,11 +72,50 @@ public class CustomerServiceLayer {
 				customerdao.deleteTableFoodcartSumChapathi();
 				customerdao.deleteTableFoodcartQuantityBeefRoast();
 				customerdao.deleteTableFoodcartSumBeefRoast();
+				
+				customerdao.deleteTableFoodcartQuantityEggmasala();
+				customerdao.deleteTableFoodcartSumEggmasala();
+				
+				
+				customerdao.deleteTableFoodcartQuantityChickennoodles();
+				customerdao.deleteTableFoodcartSumChickennoodles();
+				
+				customerdao.deleteTableFoodcartQuantityEggchowmein();
+				customerdao.deleteTableFoodcartSumEggchowmein();
+				
+				
+				customerdao.deleteTableFoodcartQuantityChickenchowmein();
+				customerdao.deleteTableFoodcartSumChickenchowmein();
+				
+				
+				customerdao.deleteTableFoodcartQuantityPrawschowmein();
+				customerdao.deleteTableFoodcartSumPrawschowmein();
+				
+				customerdao.deleteTableFoodcartQuantityTomatosoup();
+				customerdao.deleteTableFoodcartSumTomatosoup();
+				
+				
+				customerdao.deleteTableFoodcartQuantityCornsoup();
+				customerdao.deleteTableFoodcartSumCornsoup();
+				
+				customerdao.deleteTableFoodcartQuantityCarrotsoup();
+				customerdao.deleteTableFoodcartSumCarrotsoup();
+				
+				customerdao.deleteTableFoodcartQuantityFishfry();
+				customerdao.deleteTableFoodcartSumFishfry();
+				
+				
+				customerdao.deleteTableFoodcartQuantityOmlet();
+				customerdao.deleteTableFoodcartSumCornOmlet();
+				
+				customerdao.deleteTableFoodcartQuantityEggpakoda();
+				customerdao.deleteTableFoodcartSumEggpakoda();
+				
 				modelAndView.addObject("customer",customer);
 				modelAndView.addObject("username",customer.getUsername());
 				modelAndView.addObject("customer_id",customer.getCustomer_id());
 				//customerdao.emptycart();
-				modelAndView.setViewName("MultipleRestaurant.jsp");
+				modelAndView.setViewName("welcome.jsp");
 				return modelAndView;
 			}
 	    	
@@ -94,11 +133,48 @@ public class CustomerServiceLayer {
 				customerdao.deleteTableFoodcartSumChapathi();
 				customerdao.deleteTableFoodcartQuantityBeefRoast();
 				customerdao.deleteTableFoodcartSumBeefRoast();
+				customerdao.deleteTableFoodcartQuantityEggmasala();
+				customerdao.deleteTableFoodcartSumEggmasala();
+				
+				
+				customerdao.deleteTableFoodcartQuantityChickennoodles();
+				customerdao.deleteTableFoodcartSumChickennoodles();
+				
+				customerdao.deleteTableFoodcartQuantityEggchowmein();
+				customerdao.deleteTableFoodcartSumEggchowmein();
+				
+				
+				customerdao.deleteTableFoodcartQuantityChickenchowmein();
+				customerdao.deleteTableFoodcartSumChickenchowmein();
+				
+				
+				customerdao.deleteTableFoodcartQuantityPrawschowmein();
+				customerdao.deleteTableFoodcartSumPrawschowmein();
+				
+				customerdao.deleteTableFoodcartQuantityTomatosoup();
+				customerdao.deleteTableFoodcartSumTomatosoup();
+				
+				
+				customerdao.deleteTableFoodcartQuantityCornsoup();
+				customerdao.deleteTableFoodcartSumCornsoup();
+				
+				customerdao.deleteTableFoodcartQuantityCarrotsoup();
+				customerdao.deleteTableFoodcartSumCarrotsoup();
+				
+				customerdao.deleteTableFoodcartQuantityFishfry();
+				customerdao.deleteTableFoodcartSumFishfry();
+				
+				
+				customerdao.deleteTableFoodcartQuantityOmlet();
+				customerdao.deleteTableFoodcartSumCornOmlet();
+				
+				customerdao.deleteTableFoodcartQuantityEggpakoda();
+				customerdao.deleteTableFoodcartSumEggpakoda();
+				
 				modelAndView.addObject("customer",customer);
+				modelAndView.addObject("username",customer.getUsername());
+				modelAndView.addObject("customer_id",customer.getCustomer_id());
 				modelAndView.setViewName("checkForUser.jsp");
-				modelAndView.addObject("customerId", customer.getCustomer_id());
-				modelAndView.addObject("admin", admin);
-				modelAndView.addObject("customerName", customer.getFirstname());
 				return modelAndView;
 			}
 	    }	
@@ -139,7 +215,7 @@ public class CustomerServiceLayer {
 	public ModelAndView shippingaddress(HttpServletRequest request, String username) {
 		ModelAndView modelandview =new ModelAndView();
 		 modelandview.addObject("trace",request.getParameter("address"));
-		  modelandview.addObject("user",username);
+		  modelandview.addObject("username",username);
 		  modelandview.setViewName("/final.jsp");
 	      return modelandview;
 		

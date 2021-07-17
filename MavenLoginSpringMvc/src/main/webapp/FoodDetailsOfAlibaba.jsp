@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/restaurant.css"/>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -12,11 +13,11 @@
 <form  method="get" action="SelectFoodOfAlibaba">
 <input hidden="text" name="customer_id"  value="${customer_id}"/>
 <input hidden="text" name="username"  value="${username}"/>
-       <select name="foodlist">
+       <h1><select name="foodlist">
            <option>rolls</option>
            <option>chowmein</option>
        </select>
      <input type="submit" name="submit"/>
-    </form>
+    </form></h2>
 </body>
 </html>

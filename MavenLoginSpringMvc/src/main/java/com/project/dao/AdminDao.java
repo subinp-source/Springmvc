@@ -163,7 +163,7 @@ public class AdminDao {
 
 	public int changeprice(int price, int food_id) {
 		
-		 String sql="update fooditem set food_price="+price+" where food_id="+food_id;    
+		 String sql="update  set food_price="+price+" where food_id="+food_id;    
 		    return jdbctemplate.update(sql);
 	}
 
@@ -188,6 +188,236 @@ public class AdminDao {
 		 String sql="update fooditem set final_quantity=final_quantity+"+foodcount+" where food_id="+food_id;    
 		    return jdbctemplate.update(sql);
 	}
+
+
+
+
+	public List<OrderDetails> getOrderDetailsRolls() {
+		
+		 return jdbctemplate.query("select * from  updateorderrolls",new RowMapper<OrderDetails>(){    
+	            public OrderDetails mapRow(ResultSet resultset, int row) throws SQLException {    
+	            	OrderDetails details=new OrderDetails(); 
+	                details.setFood_id(resultset.getInt("food_id"));
+	                details.setCustomer_id(resultset.getInt("customer_id"));    
+	                details.setOrder_quantity(resultset.getInt("order_quantity"));    
+	                
+	                return details;    
+	            }    
+	        });
+		
+		
+		
+	}
+
+
+
+
+	public List<OrderDetails> getOrderDetailschowmein() {
+		
+		
+		 return jdbctemplate.query("select * from  updateorderchowmein",new RowMapper<OrderDetails>(){    
+	            public OrderDetails mapRow(ResultSet resultset, int row) throws SQLException {    
+	            	OrderDetails details=new OrderDetails(); 
+	                details.setFood_id(resultset.getInt("food_id"));
+	                details.setCustomer_id(resultset.getInt("customer_id"));    
+	                details.setOrder_quantity(resultset.getInt("order_quantity"));    
+	                
+	                return details;    
+	            }    
+	        });
+		
+		
+	}
+
+
+
+
+	public List<OrderDetails> getOrderDetailssoup() {
+		
+		 return jdbctemplate.query("select * from  updateordersoup",new RowMapper<OrderDetails>(){    
+	            public OrderDetails mapRow(ResultSet resultset, int row) throws SQLException {    
+	            	OrderDetails details=new OrderDetails(); 
+	                details.setFood_id(resultset.getInt("food_id"));
+	                details.setCustomer_id(resultset.getInt("customer_id"));    
+	                details.setOrder_quantity(resultset.getInt("order_quantity"));    
+	                
+	                return details;    
+	            }    
+	        });
+		
+		
+		
+	}
+
+
+
+
+	public List<OrderDetails> getOrderDetailsstartersdeepfry() {
+		
+		 return jdbctemplate.query("select * from  updateorderstartersdeepfry",new RowMapper<OrderDetails>(){    
+	            public OrderDetails mapRow(ResultSet resultset, int row) throws SQLException {    
+	            	OrderDetails details=new OrderDetails(); 
+	                details.setFood_id(resultset.getInt("food_id"));
+	                details.setCustomer_id(resultset.getInt("customer_id"));    
+	                details.setOrder_quantity(resultset.getInt("order_quantity"));    
+	                
+	                return details;    
+	            }    
+	        });
+		
+		
+		
+	}
+
+
+
+
+	public List<Food> getFoodDetailsRolls() {
+		 return jdbctemplate.query("select * from rolls",new RowMapper<Food>(){    
+	            public Food mapRow(ResultSet resultset, int row) throws SQLException {    
+	                Food food=new Food(); 
+	                food.setFood_id(resultset.getInt("food_id"));
+	                food.setFood_item(resultset.getString("food_item"));    
+	                food.setFood_price(resultset.getInt("food_price"));    
+	                food.setFinal_quantity(resultset.getInt("quantity"));
+	                return food;    
+	            }    
+	        });
+	}
+
+
+
+
+	public int changepriceRolls(int price, int food_id) {
+		String sql="update rolls set food_price="+price+" where food_id="+food_id;    
+	    return jdbctemplate.update(sql);
+		
+	}
+
+
+
+
+	public List<Food> getFoodDetailsChowmein() {
+	
+		 return jdbctemplate.query("select * from chowmein",new RowMapper<Food>(){    
+	            public Food mapRow(ResultSet resultset, int row) throws SQLException {    
+	                Food food=new Food(); 
+	                food.setFood_id(resultset.getInt("food_id"));
+	                food.setFood_item(resultset.getString("food_item"));    
+	                food.setFood_price(resultset.getInt("food_price"));    
+	                food.setFinal_quantity(resultset.getInt("quantity"));
+	                return food;    
+	            }    
+	        });
+		
+		
+		
+		
+	}
+
+
+
+
+	public int changepriceChowmein(int price, int food_id) {
+		
+		
+		String sql="update chowmein set food_price="+price+" where food_id="+food_id;    
+	    return jdbctemplate.update(sql);
+		
+	}
+
+
+
+
+	public List<Food> getFoodDetailsSoup() {
+		return jdbctemplate.query("select * from soup",new RowMapper<Food>(){    
+            public Food mapRow(ResultSet resultset, int row) throws SQLException {    
+                Food food=new Food(); 
+                food.setFood_id(resultset.getInt("food_id"));
+                food.setFood_item(resultset.getString("food_item"));    
+                food.setFood_price(resultset.getInt("food_price"));    
+                food.setFinal_quantity(resultset.getInt("quantity"));
+                return food;    
+            }    
+        });
+	}
+
+
+
+
+	public int changepriceSoup(int price, int food_id) {
+
+		String sql="update soup set food_price="+price+" where food_id="+food_id;    
+	    return jdbctemplate.update(sql);
+		
+	}
+
+
+
+
+	public List<Food> getFoodDetailsStartersdeepfry() {
+		return jdbctemplate.query("select * from startersdeepfry",new RowMapper<Food>(){    
+            public Food mapRow(ResultSet resultset, int row) throws SQLException {    
+                Food food=new Food(); 
+                food.setFood_id(resultset.getInt("food_id"));
+                food.setFood_item(resultset.getString("food_item"));    
+                food.setFood_price(resultset.getInt("food_price"));    
+                food.setFinal_quantity(resultset.getInt("quantity"));
+                return food;    
+            }    
+        });
+	}
+
+
+
+
+	public int changepriceStartersdeepfry(int price, int food_id) {
+		String sql="update startersdeepfry set food_price="+price+" where food_id="+food_id;    
+	    return jdbctemplate.update(sql);
+		
+	}
+
+
+
+
+	public int updatefoodcountRolls(int foodcount, int food_id) {
+		
+		String sql="update rolls set quantity=quantity+"+foodcount+" where food_id="+food_id;    
+	    return jdbctemplate.update(sql);
+		
+	}
+
+
+
+
+	public int updatefoodcountChowmein(int foodcount, int food_id) {
+		String sql="update chowmein set quantity=quantity+"+foodcount+" where food_id="+food_id;    
+	    return jdbctemplate.update(sql);
+		
+	}
+
+
+
+
+	public int updatefoodcountSoup(int foodcount, int food_id) {
+		String sql="update soup set quantity=quantity+"+foodcount+" where food_id="+food_id;    
+	    return jdbctemplate.update(sql);
+		
+	}
+
+
+
+
+	public int updatefoodcountStartersdeepfry(int foodcount, int food_id) {
+		String sql="update startersdeepfry set quantity=quantity+"+foodcount+" where food_id="+food_id;    
+	    return jdbctemplate.update(sql);
+		
+	}
+
+
+
+
+	
 	
 	
 	

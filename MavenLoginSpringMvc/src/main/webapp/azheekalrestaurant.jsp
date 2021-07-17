@@ -5,10 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/restaurant.css"/>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body><h2>
 <c:forEach var="foodlistofazheekal" items="${listOfFood}">
         ${foodlistofazheekal.food_item} Rs.${foodlistofazheekal.food_price} 
         <form action="Azheekalrestaurantbooking" >

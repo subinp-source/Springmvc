@@ -114,7 +114,7 @@ public class AlibabaRestaurantBookingController {
 	}
 	
 
-	@RequestMapping(value="/shipping")
+	@RequestMapping(value="/shippingAlibaba")
 	public ModelAndView shipping(HttpServletRequest request) {
 		ModelAndView modelandview=new ModelAndView();
 		sum=0;

@@ -7,9 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-SAME USER EXITS .<br>PLEASE TRY OTHER.<br><br>
-<form action="UserExceptionByAdmin",method="post">
-<input type="submit" value="Register as new  user">
-</form>
+<form action="addAdmin",method="post">
+<input type="submit" value="addadmin">
+</form><br>
+<form action="deleteAdmin",method="post">
+<input type="submit" value="deleteadmin">
+</form><br>
 </body>
 </html>

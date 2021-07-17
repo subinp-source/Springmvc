@@ -197,13 +197,135 @@ public class CustomerDao {
 	}
 
 	
-	public int checker(int quantity) {
-		if(quantity==0) {
-			return 1;
+	public int checker(int quantity,int value) {
+		if(quantity!=0) {
+		if(quantity>=value) {
+			return value;
 		}else {
-			return 0;
+			return quantity;
+		}}else {
+			return 1;
 		}
 	}
+	public int deleteTableFoodcartQuantityEggmasala() {
+		String sql="update foodcartalibabarolls set quantity="+0+" where food_id="+"'"+1+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartSumEggmasala() {
+		String sql="update foodcartalibabarolls set sum="+0+" where food_id="+"'"+1+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartQuantityChickennoodles() {
+		String sql="update foodcartalibabarolls set quantity="+0+" where food_id="+"'"+2+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartSumChickennoodles() {
+		 String sql="update foodcartalibabarolls set sum="+0+" where food_id="+"'"+2+"'";    
+		    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartQuantityEggchowmein() {
+		String sql="update foodcartalibabachowmein set quantity="+0+" where food_id="+"'"+1+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartSumEggchowmein() {
+		String sql="update foodcartalibabachowmein set sum="+0+" where food_id="+"'"+1+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartQuantityChickenchowmein() {
+		String sql="update foodcartalibabachowmein set quantity="+0+" where food_id="+"'"+2+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartSumChickenchowmein() {
+		 String sql="update foodcartalibabachowmein set sum="+0+" where food_id="+"'"+2+"'";    
+		    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartQuantityPrawschowmein() {
+		String sql="update foodcartalibabachowmein set quantity="+0+" where food_id="+"'"+3+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartSumPrawschowmein() {
+		String sql="update foodcartalibabachowmein set sum="+0+" where food_id="+"'"+3+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartQuantityTomatosoup() {
+		String sql="update foodcartazheekalsoup set quantity="+0+" where food_id="+"'"+1+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartSumTomatosoup() {
+		String sql="update foodcartazheekalsoup set sum="+0+" where food_id="+"'"+1+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartQuantityCornsoup() {
+		String sql="update foodcartazheekalsoup set quantity="+0+" where food_id="+"'"+2+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartSumCornsoup() {
+		String sql="update foodcartazheekalsoup set sum="+0+" where food_id="+"'"+2+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartQuantityCarrotsoup() {
+		String sql="update foodcartazheekalsoup set quantity="+0+" where food_id="+"'"+3+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartSumCarrotsoup() {
+		String sql="update foodcartazheekalsoup set sum="+0+" where food_id="+"'"+3+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartQuantityFishfry() {
+		String sql="update foodcartazheekalstartersdeepfry set quantity="+0+" where food_id="+"'"+1+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartSumFishfry() {
+		String sql="update foodcartazheekalstartersdeepfry set sum="+0+" where food_id="+"'"+1+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartQuantityOmlet() {
+		String sql="update foodcartazheekalstartersdeepfry set quantity="+0+" where food_id="+"'"+2+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartSumCornOmlet() {
+		String sql="update foodcartazheekalstartersdeepfry set sum="+0+" where food_id="+"'"+2+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartQuantityEggpakoda() {
+		String sql="update foodcartazheekalstartersdeepfry set quantity="+0+" where food_id="+"'"+3+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	public int deleteTableFoodcartSumEggpakoda() {
+		String sql="update foodcartazheekalstartersdeepfry set sum="+0+" where food_id="+"'"+3+"'";    
+	    return jdbctemplate.update(sql);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }	
 

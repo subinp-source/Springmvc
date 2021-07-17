@@ -1,7 +1,5 @@
 package com.project.modelclass;
 
-import java.sql.Array;
-
 public class Food {
 	
 	private int food_id;

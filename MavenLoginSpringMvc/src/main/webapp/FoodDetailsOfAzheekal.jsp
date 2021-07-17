@@ -5,10 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="css/restaurant.css"/>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body><h2>
 <form  method="get" action="SelectFoodOfAzheekal">
 <input hidden="text" name="customer_id"  value="${customer_id}"/>
 <input hidden="text" name="username"  value="${username}"/>
@@ -17,6 +18,6 @@
            <option>startersdeepfry</option>
        </select>
      <input type="submit" name="submit"/>
-    </form>
+    </form></h2>
 </body>
 </html>

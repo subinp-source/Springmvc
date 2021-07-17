@@ -57,9 +57,11 @@ public class LoginController {
 	
 	
 	
-	@RequestMapping(value="/GotoWelcomePage/{username}/{customer_id}",method=RequestMethod.GET)
-	public ModelAndView Goto(@PathVariable int customer_id,@PathVariable String username) {
+	@RequestMapping(value="/GotoWelcomePage",method=RequestMethod.GET)
+	public ModelAndView Goto(HttpServletRequest request) {
 		ModelAndView modelandview=new ModelAndView();
+		int customer_id=Integer.parseInt(request.getParameter("customer_id"));
+		 String username=request.getParameter("username");
 		modelandview.addObject("username",username);
 		modelandview.addObject("customer_id",customer_id);
 		modelandview.setViewName("/welcome.jsp");

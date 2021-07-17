@@ -9,27 +9,30 @@
 <body>
 <h1>Welcome to Admin page</h1>
 
-<form action="addfood">
-<input type="submit" value="add food">
+
+user management:<form action="userManagement">
+<input type="submit" value="submit">
 </form><br>
-<form action="changeprice">
-<input type="submit" value="price change">
+
+admin management:<form action="adminManagement">
+<input type="submit" value="submit">
 </form><br>
-<form action="orderdetails">
-<input type="submit" value="order details">
+
+ordinary hotel:<form action="ordinaryHotel">
+<input type="submit" value="submit">
 </form><br>
-<form action="addAdmin">
-<input type="submit" value="addadmin">
+
+Alibaba Restaurant:<form action="AlibabaRestaurantAdminManagement">
+<input type="submit" value="submit">
 </form><br>
-<form action="deleteAdmin">
-<input type="submit" value="deleteadmin">
+
+Azheekal Restaurant:<form action="AzheekalRestaurantAdminManagement">
+<input type="submit" value="submit">
 </form><br>
-<form action="addUser">
-<input type="submit" value="addUser">
-</form><br>
-<form action="deleteUser">
-<input type="submit" value="delete user">
-</form><br>
+
+
+
+
 <a href="index.jsp">back to login</a><br>
 </body>
 </html>

@@ -19,5 +19,8 @@
    <td><a href="DeleteAdmin/${admin.username}">Delete</a></td>  
    </tr>  
    </c:forEach>  
-   </table>  
+   </table><br>  
    <br/>
+   <a href="./admin.jsp">go back</a>
+   </body>
+   </html>

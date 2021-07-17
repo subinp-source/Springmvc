@@ -26,7 +26,8 @@ dear ${name},
 
    you cost Rs.${sum} for this order.<br><br>
    <h2>Shipping Address</h2>
- <form action="/MavenLoginSpringMvc/shipping/${username}">
+ <form action="shipping">
+ <input hidden="text" name="username"  value="${username}"/>
    <input type="text" name="address">
    <input type="submit" value="confirm order">
    </form><br> 

@@ -35,10 +35,15 @@ public class BookingController {
 	
 	
 
-	@RequestMapping(value="/booking/{food_id}/{food_item}/{username}/{customer_id}",method = RequestMethod.GET) 
-	public ModelAndView book(@PathVariable String username,@PathVariable int customer_id,@PathVariable int food_id,@PathVariable String food_item,HttpServletRequest request,Model m){
+	@RequestMapping(value="/booking",method = RequestMethod.GET) 
+	public ModelAndView book(HttpServletRequest request){
 		ModelAndView modelandview =new ModelAndView();
-	
+		int customer_id=Integer.parseInt(request.getParameter("customer_id"));
+		 String username=request.getParameter("username");
+		 int food_id=Integer.parseInt(request.getParameter("food_id"));
+		 String food_item=request.getParameter("food_item");
+		 modelandview.addObject("food_id", food_id);
+		 modelandview.addObject("food_item", food_item);
 		//return customerservice.booking(sum,username,customer_id,request);
 		
 		int Initialsum=0;OutOfStock outofstocks=new OutOfStock();
@@ -47,7 +52,15 @@ public class BookingController {
 		 List<OutOfStock> outofstockList =customerdao.stockquantitychecker(food_id);
 	  outofstocks=outofstockList.get(0);
 	  int quantity=outofstocks.getQuantity();
-	  int flag=customerdao.checker(quantity);
+	  int flag=customerdao.checker(quantity,value);
+	  if(flag==value) {
+		  value=flag;
+	  }else if(flag==1) {
+		  modelandview.setViewName("/outofstock.jsp");
+			return modelandview;
+	  }else {
+		  value=flag;
+	  }
 	  customerdao.updateFood(value,food_id);
 	  customerdao.updateFoodCart(value,food_item);
 	  List<Price> accept=customerdao.price(food_id);
@@ -59,21 +72,17 @@ public class BookingController {
 	  customerdao.sumAdditionToCartTable(Initialsum,food_item);
 	  sum=sum+Initialsum;
 	  customerdao.updateorder(food_id,id,value);
-	  modelandview.setViewName("redirect:http://localhost:8080/MavenLoginSpringMvc/detail/{username}/{customer_id}");
-		  //customerdao.updatetablevalues(food_item,id,value); 
-		  
-		  if(flag==1) {
-		  modelandview.setViewName("./outofstock.jsp");
-				return modelandview;
-			}
-		  
+	  modelandview.setViewName("redirect:/detail");
+		  //customerdao.updatetablevalues(food_item,id,value);
 		  
 		  return modelandview;
 	 }
 	
 	
-	@RequestMapping(value="/detail/{username}/{customer_id}",method = RequestMethod.GET)
-	public ModelAndView viewfood(Model m,@PathVariable String username,@PathVariable int customer_id) {
+	@RequestMapping(value="/detail",method = RequestMethod.GET)
+	public ModelAndView viewfood(HttpServletRequest request) {
+		int customer_id=Integer.parseInt(request.getParameter("customer_id"));
+		 String username=request.getParameter("username");
 		return customerservice.viewFood(sum,username,customer_id);
 	}
 	
@@ -82,7 +91,7 @@ public class BookingController {
 	
 	@RequestMapping("/back")
 	public String back() {
-		return "redirect:/detail/{username}/{customer_id}";
+		return "redirect:/detail";
 	}
 	
 	
@@ -91,16 +100,19 @@ public class BookingController {
 		return"redirect:/index";
 	}
 	  
-	@RequestMapping(value="/summation/{sum}/{username}/{customer_id}",method = RequestMethod.GET)
-	public ModelAndView summation(@PathVariable int customer_id,@PathVariable String username,@PathVariable int sum,HttpServletRequest request, Model m) {
-		
+	@RequestMapping(value="/summation",method = RequestMethod.GET)
+	public ModelAndView summation(HttpServletRequest request) {
+		int customer_id=Integer.parseInt(request.getParameter("customer_id"));
+		 String username=request.getParameter("username");
+		 sum=Integer.parseInt(request.getParameter("sum"));
 		return customerservice.summationService(sum,username);
 		
 	}
 	
-	  @RequestMapping("/shipping/{username}") 
-	  public ModelAndView address(HttpServletRequest request,@PathVariable String username) { 
+	  @RequestMapping("/shipping") 
+	  public ModelAndView address(HttpServletRequest request) { 
 		  sum=0;
+		  String username=request.getParameter("username");
 		  return customerservice.shippingaddress(request,username);
 		 
 	  }

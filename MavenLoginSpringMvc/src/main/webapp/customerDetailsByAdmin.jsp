@@ -18,7 +18,8 @@
    <td>${customer.username}</td>  
    <td>${customer. email}</td>  
    <td>${customer.password}</td>   
-   <td><a href="DeleteCustomer/${customer.customer_id}">Delete</a></td>  
+   <%-- <td><a href="DeleteCustomer/${customer.customer_id}">Delete</a></td> --%>  
+   <td><form action="DeleteCustomer"><input hidden="text" name="customer_id" value="${customer.customer_id}" /><input type="submit" /></form></td>
    </tr>  
    </c:forEach>  
    </table>  
