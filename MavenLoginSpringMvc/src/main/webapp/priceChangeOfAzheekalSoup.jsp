@@ -11,7 +11,7 @@
  <c:forEach var="food" items="${SoupFoodList}">
         ${food.food_item} old price Rs.${food.food_price} 
         <form action="pricechangeSoup/${food.food_id}">
-        <input type="text" name="price">
+        <input type="text" name="price" required>
         <input type="submit" value="change"><br><br>
    </form>
    </c:forEach><br>

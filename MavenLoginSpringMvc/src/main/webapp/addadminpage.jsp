@@ -12,6 +12,6 @@ Username<input type="text" name="usernameOfAdmin" required><br><br>
 password<input type="text" name="passwordOfAdmin" required><br><br>
 <input type="submit" value="addadmin">
 </form><br>
-<a href="admin.jsp">Go back</a>
+<a href="/admin.jsp">Go back</a>
 </body>
 </html>

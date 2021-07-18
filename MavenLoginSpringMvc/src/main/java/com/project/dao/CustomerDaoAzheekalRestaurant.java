@@ -36,38 +36,22 @@ public class CustomerDaoAzheekalRestaurant {
 	}
 	
 	
-	
-	
 
 	public int updateFoodsoup(int value, int food_id) {
 		
 		String sql="update soup set quantity=quantity-"+value+" where food_id="+food_id;    
 	    return jdbctemplate.update(sql);
 		
-		
 	}
-
-
 
 
 
 	public int updateFoodCartsoup(int value, int food_id) {
 		
-		
 		String sql="update foodcartazheekalsoup set quantity=quantity+"+value+" where food_id="+food_id;    
 	    return jdbctemplate.update(sql);
 		
-		
 	}
-
-
-
-
-
-	
-
-
-
 
 
 	public int updateordersoup(int food_id, int id, int value) {
@@ -75,8 +59,6 @@ public class CustomerDaoAzheekalRestaurant {
 	    return jdbctemplate.update(sql);
 		
 	}
-
-
 
 
 
@@ -88,15 +70,11 @@ public class CustomerDaoAzheekalRestaurant {
 
 
 
-
-
 	public int updateFoodstartersdeepfry(int value, int food_id) {
 		String sql="update startersdeepfry set quantity=quantity-"+value+" where food_id="+food_id;    
 	    return jdbctemplate.update(sql);
 		
 	}
-
-
 
 
 
@@ -106,16 +84,11 @@ public class CustomerDaoAzheekalRestaurant {
 	}
 
 
-
-
-
 	public int sumAdditionToCartTablestartersdeepfry(int initialsum, String food_item) {
 		
 		String sql="update foodcartazheekalstartersdeepfry set sum=sum+"+initialsum+" where food_item="+"'"+food_item+"'";    
 	    return jdbctemplate.update(sql);
 	}
-
-
 
 
 

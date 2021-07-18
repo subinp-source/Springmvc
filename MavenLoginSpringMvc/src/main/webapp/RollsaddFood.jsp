@@ -11,7 +11,7 @@
     <c:forEach var="food" items="${RollsFoodDetailsList}">
         ${food.food_item} Rs.${food.food_price} 
         <form action="updatingfoodRolls/${food.food_id}">
-        <input type="text" name="count">
+        <input type="text" name="count" required>
         <input type="submit" value="add"><br><br>
    </form>
    </c:forEach><br>

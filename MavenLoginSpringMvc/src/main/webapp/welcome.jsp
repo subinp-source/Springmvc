@@ -24,10 +24,3 @@
     </form>
 </body>
 </html>
-
-
- <%-- <h3>Alibaba restaurant :</h3><form action="/MavenLoginSpringMvc/detail/${username}/${customer_id}" ><input type="submit" value="click here">
- </form>
-<!--   <form action="something">
- <input type="submit" 
- </form> --> --%>

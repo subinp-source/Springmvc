@@ -18,43 +18,34 @@ import com.project.modelclass.FoodCartAlibaba;
 import com.project.modelclass.FoodListOfRestaurant;
 import com.project.modelclass.OutOfStock;
 import com.project.modelclass.Price;
+import com.project.servicelayer.CustomerServiceLayer;
 
 @Controller
 public class AlibabaRestaurantBookingController {
 	@Autowired
 	CustomerDaoAlibabaRestaurant customerdaoalibaba;
+	@Autowired
+	CustomerServiceLayer customerservice;
 	int sum=0;
+	
+	
 	 @RequestMapping(value="/AlibabaRestaurant")
 	public ModelAndView FoodDetailsAlibaba(HttpServletRequest request) {
-		 int customer_id=Integer.parseInt(request.getParameter("customer_id"));
-		 String username=request.getParameter("username");
-		 ModelAndView modelandview=new ModelAndView();
-			modelandview.setViewName("FoodDetailsOfAlibaba.jsp");
-			modelandview.addObject("username", username);
-			modelandview.addObject("customer_id", customer_id);
-			return modelandview;
+		
+		 return customerservice.FoodDetailsAlibabaService(request);
 			
 		} 
 	
 	@RequestMapping(value="/SelectFoodOfAlibaba")
 	public ModelAndView selectFoodOfAlibaba(HttpServletRequest request) {
-		int customer_id=Integer.parseInt(request.getParameter("customer_id"));
-		 String username=request.getParameter("username");
-		ModelAndView modelandview=new ModelAndView();
-		String foodlist=request.getParameter("foodlist");
-		List<FoodListOfRestaurant> listOfFood=customerdaoalibaba.LoadFoodDetails(foodlist);
-		modelandview.addObject("sum",sum);
-		modelandview.addObject("foodlist",foodlist);
-		modelandview.addObject("listOfFood",listOfFood);
-		modelandview.addObject("username",username);
-		modelandview.addObject("customer_id",customer_id);
-		modelandview.setViewName("alibabarestaurant.jsp");
-		return modelandview;
+		
+		return customerservice.selectFoodOfAlibabaservice(request,sum);
+		
 		
 	}
 	
 	@RequestMapping(value="/Alibabarestaurantbooking")
-	public ModelAndView booking(HttpServletRequest request,Model model) {
+	public ModelAndView booking(HttpServletRequest request) {
 		ModelAndView modelandview=new ModelAndView();
 		int food_id=Integer.parseInt(request.getParameter("food_id"));
 		int customer_id=Integer.parseInt(request.getParameter("customer_id"));
@@ -118,12 +109,8 @@ public class AlibabaRestaurantBookingController {
 	public ModelAndView shipping(HttpServletRequest request) {
 		ModelAndView modelandview=new ModelAndView();
 		sum=0;
-		String username=request.getParameter("username");
-		String address=request.getParameter("address");
-		modelandview.addObject("username",username);
-		modelandview.addObject("address",address);
-		modelandview.setViewName("alibabaFinal.jsp");
-		return modelandview;
+		return customerservice.shippingService(request);
+		
 	}
 	
 	

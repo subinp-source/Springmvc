@@ -28,7 +28,7 @@ dear ${name},
    <h2>Shipping Address</h2>
  <form action="shipping">
  <input hidden="text" name="username"  value="${username}"/>
-   <input type="text" name="address">
+   <input type="text" name="address" required>
    <input type="submit" value="confirm order">
    </form><br> 
    

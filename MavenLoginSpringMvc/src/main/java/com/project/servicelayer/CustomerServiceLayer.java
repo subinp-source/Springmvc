@@ -12,11 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dao.AdminDao;
 import com.project.dao.CustomerDao;
+import com.project.dao.CustomerDaoAlibabaRestaurant;
+import com.project.dao.CustomerDaoAzheekalRestaurant;
 import com.project.modelclass.Admin;
 import com.project.modelclass.Cartlisting;
 import com.project.modelclass.Customer;
 import com.project.modelclass.Food;
 import com.project.modelclass.FoodCartAzheekal;
+import com.project.modelclass.FoodListOfRestaurant;
 import com.project.modelclass.OrderDetails;
 import com.project.modelclass.OutOfStock;
 import com.project.modelclass.Price;
@@ -25,14 +28,17 @@ public class CustomerServiceLayer {
 
 	@Autowired
 	CustomerDao customerdao;
-	
+	@Autowired
+	CustomerDaoAlibabaRestaurant customerdaoalibaba;
+	@Autowired
+	CustomerDaoAzheekalRestaurant customerdaoazheekal;
 	@Autowired
 	AdminDao admindao;
 	
 	
 	
-	public String register(HttpServletRequest request) throws SQLIntegrityConstraintViolationException,DuplicateKeyException{
-		
+	public ModelAndView register(HttpServletRequest request) {
+		ModelAndView modelandview= new ModelAndView();
 		Customer customer = new Customer();
 		customer.setUsername(request.getParameter("username"));
 		customer.setPassword(request.getParameter("password"));
@@ -42,8 +48,8 @@ public class CustomerServiceLayer {
 		customer.setAddress(request.getParameter("address"));
 		customer.setPhone(request.getParameter("phone"));
 		customerdao.saveCustomerDetails(customer);
-		
-		return "success.jsp";
+		modelandview.setViewName("success.jsp");
+		return modelandview;
 		
 	}
 	
@@ -65,52 +71,6 @@ public class CustomerServiceLayer {
 			} else {
 				
 				customer=customerList.get(0);
-				//customerdao.emptyTable();
-				customerdao.deleteTableFoodcartQuantityDosa();
-				customerdao.deleteTableFoodcartSumDosa();
-				customerdao.deleteTableFoodcartQuantityChapathi();
-				customerdao.deleteTableFoodcartSumChapathi();
-				customerdao.deleteTableFoodcartQuantityBeefRoast();
-				customerdao.deleteTableFoodcartSumBeefRoast();
-				
-				customerdao.deleteTableFoodcartQuantityEggmasala();
-				customerdao.deleteTableFoodcartSumEggmasala();
-				
-				
-				customerdao.deleteTableFoodcartQuantityChickennoodles();
-				customerdao.deleteTableFoodcartSumChickennoodles();
-				
-				customerdao.deleteTableFoodcartQuantityEggchowmein();
-				customerdao.deleteTableFoodcartSumEggchowmein();
-				
-				
-				customerdao.deleteTableFoodcartQuantityChickenchowmein();
-				customerdao.deleteTableFoodcartSumChickenchowmein();
-				
-				
-				customerdao.deleteTableFoodcartQuantityPrawschowmein();
-				customerdao.deleteTableFoodcartSumPrawschowmein();
-				
-				customerdao.deleteTableFoodcartQuantityTomatosoup();
-				customerdao.deleteTableFoodcartSumTomatosoup();
-				
-				
-				customerdao.deleteTableFoodcartQuantityCornsoup();
-				customerdao.deleteTableFoodcartSumCornsoup();
-				
-				customerdao.deleteTableFoodcartQuantityCarrotsoup();
-				customerdao.deleteTableFoodcartSumCarrotsoup();
-				
-				customerdao.deleteTableFoodcartQuantityFishfry();
-				customerdao.deleteTableFoodcartSumFishfry();
-				
-				
-				customerdao.deleteTableFoodcartQuantityOmlet();
-				customerdao.deleteTableFoodcartSumCornOmlet();
-				
-				customerdao.deleteTableFoodcartQuantityEggpakoda();
-				customerdao.deleteTableFoodcartSumEggpakoda();
-				
 				modelAndView.addObject("customer",customer);
 				modelAndView.addObject("username",customer.getUsername());
 				modelAndView.addObject("customer_id",customer.getCustomer_id());
@@ -127,50 +87,6 @@ public class CustomerServiceLayer {
 				return modelAndView;
 			} else {
 				customer=customerList.get(0);
-				customerdao.deleteTableFoodcartQuantityDosa();
-				customerdao.deleteTableFoodcartSumDosa();
-				customerdao.deleteTableFoodcartQuantityChapathi();
-				customerdao.deleteTableFoodcartSumChapathi();
-				customerdao.deleteTableFoodcartQuantityBeefRoast();
-				customerdao.deleteTableFoodcartSumBeefRoast();
-				customerdao.deleteTableFoodcartQuantityEggmasala();
-				customerdao.deleteTableFoodcartSumEggmasala();
-				
-				
-				customerdao.deleteTableFoodcartQuantityChickennoodles();
-				customerdao.deleteTableFoodcartSumChickennoodles();
-				
-				customerdao.deleteTableFoodcartQuantityEggchowmein();
-				customerdao.deleteTableFoodcartSumEggchowmein();
-				
-				
-				customerdao.deleteTableFoodcartQuantityChickenchowmein();
-				customerdao.deleteTableFoodcartSumChickenchowmein();
-				
-				
-				customerdao.deleteTableFoodcartQuantityPrawschowmein();
-				customerdao.deleteTableFoodcartSumPrawschowmein();
-				
-				customerdao.deleteTableFoodcartQuantityTomatosoup();
-				customerdao.deleteTableFoodcartSumTomatosoup();
-				
-				
-				customerdao.deleteTableFoodcartQuantityCornsoup();
-				customerdao.deleteTableFoodcartSumCornsoup();
-				
-				customerdao.deleteTableFoodcartQuantityCarrotsoup();
-				customerdao.deleteTableFoodcartSumCarrotsoup();
-				
-				customerdao.deleteTableFoodcartQuantityFishfry();
-				customerdao.deleteTableFoodcartSumFishfry();
-				
-				
-				customerdao.deleteTableFoodcartQuantityOmlet();
-				customerdao.deleteTableFoodcartSumCornOmlet();
-				
-				customerdao.deleteTableFoodcartQuantityEggpakoda();
-				customerdao.deleteTableFoodcartSumEggpakoda();
-				
 				modelAndView.addObject("customer",customer);
 				modelAndView.addObject("username",customer.getUsername());
 				modelAndView.addObject("customer_id",customer.getCustomer_id());
@@ -225,37 +141,103 @@ public class CustomerServiceLayer {
 
 
 
-	/*public ModelAndView booking(int sum, String username, int customer_id, HttpServletRequest request,int food_id,String food_item) {
+	public ModelAndView FoodDetailsAlibabaService(HttpServletRequest request) {
+		int customer_id=Integer.parseInt(request.getParameter("customer_id"));
+		 String username=request.getParameter("username");
+		 ModelAndView modelandview=new ModelAndView();
+			modelandview.setViewName("FoodDetailsOfAlibaba.jsp");
+			modelandview.addObject("username", username);
+			modelandview.addObject("customer_id", customer_id);
+			return modelandview;
+	}
+
+
+
+	public ModelAndView shippingService(HttpServletRequest request) {
 		ModelAndView modelandview =new ModelAndView();
-		int Initialsum=0;OutOfStock outofstocks=new OutOfStock();
-		 int value=Integer.parseInt(request.getParameter("count"));
-	  List<OutOfStock> outofstockList =customerdao.stockquantitychecker(food_id);
-	  outofstocks=outofstockList.get(0);
-	  int id = customer_id;
-	  int quantity=outofstocks.getQuantity();
-	  int flag=customerdao.checker(value,quantity);
-	  customerdao.updateFood(value,food_id);
-	  customerdao.updateFoodCart(value,food_item);
-	  List<Price> accept=customerdao.price(food_id);
-	  modelandview.addObject("username",username);
+		String username=request.getParameter("username");
+		String address=request.getParameter("address");
+		modelandview.addObject("username",username);
+		modelandview.addObject("address",address);
+		modelandview.setViewName("alibabaFinal.jsp");
+		return modelandview;
+	}
+
+
+
+	public ModelAndView shippingazheekalservice(HttpServletRequest request) {
+		ModelAndView modelandview =new ModelAndView();
+		String username=request.getParameter("username");
+		String address=request.getParameter("address");
+		modelandview.addObject("username",username);
+		modelandview.addObject("address",address);
+		modelandview.setViewName("azheekalFinal.jsp");
+		return modelandview;
+	}
+
+
+
+	public ModelAndView AzheekalRestaurantservice(HttpServletRequest request) {
+		ModelAndView modelandview =new ModelAndView();
+		int customer_id=Integer.parseInt(request.getParameter("customer_id"));
+		 String username=request.getParameter("username");
+			modelandview.setViewName("FoodDetailsOfAzheekal.jsp");
+			modelandview.addObject("username", username);
+			modelandview.addObject("customer_id", customer_id);
+			return modelandview;
+	}
+
+
+
+	public ModelAndView selectFoodOfAzheekalservice(HttpServletRequest request, int sum) {
+		ModelAndView modelandview =new ModelAndView();
+		int customer_id=Integer.parseInt(request.getParameter("customer_id"));
+		 String username=request.getParameter("username");
+		String foodlist=request.getParameter("foodlist");
+		List<FoodListOfRestaurant> listOfFood=customerdaoazheekal.LoadFoodDetails(foodlist);
+		modelandview.addObject("sum",sum);
+		modelandview.addObject("foodlist",foodlist);
+		modelandview.addObject("listOfFood",listOfFood);
+		modelandview.addObject("username",username);
 		modelandview.addObject("customer_id",customer_id);
-	  for (Price price : accept) {
-	   Initialsum=Initialsum+(price.getEach_price()*value);
-	  }
-	  customerdao.sumAdditionToCartTable(Initialsum,food_item);
-	  sum=sum+Initialsum;
-	  customerdao.updateorder(food_id,id,value);
-	  modelandview.setViewName("redirect:http://localhost:8080/MavenLoginSpringMvc/detail/{username}/{customer_id}");
-		  customerdao.updatetablevalues(food_item,id,value); 
-		  if(flag==1) {
-		  modelandview.setViewName("./outofstock.jsp");
-				return modelandview;
-			}
-		  return modelandview;
-	}*/
-	
-	
-	
+		modelandview.setViewName("azheekalrestaurant.jsp");
+		return modelandview;
+	}
+
+
+
+	public ModelAndView selectFoodOfAlibabaservice(HttpServletRequest request, int sum) {
+		int customer_id=Integer.parseInt(request.getParameter("customer_id"));
+		 String username=request.getParameter("username");
+		ModelAndView modelandview=new ModelAndView();
+		String foodlist=request.getParameter("foodlist");
+		List<FoodListOfRestaurant> listOfFood=customerdaoalibaba.LoadFoodDetails(foodlist);
+		modelandview.addObject("sum",sum);
+		modelandview.addObject("foodlist",foodlist);
+		modelandview.addObject("listOfFood",listOfFood);
+		modelandview.addObject("username",username);
+		modelandview.addObject("customer_id",customer_id);
+		modelandview.setViewName("alibabarestaurant.jsp");
+		return modelandview;
+	}
+
+
+
+	public ModelAndView GotoService(HttpServletRequest request) {
+		ModelAndView modelandview=new ModelAndView();
+		int customer_id=Integer.parseInt(request.getParameter("customer_id"));
+		 String username=request.getParameter("username");
+		modelandview.addObject("username",username);
+		modelandview.addObject("customer_id",customer_id);
+		modelandview.setViewName("/welcome.jsp");
+		return modelandview;
+	}
+
+
+
+
+
+
 	
 }	    
 

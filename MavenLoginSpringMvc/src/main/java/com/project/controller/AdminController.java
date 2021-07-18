@@ -32,41 +32,45 @@ public class AdminController {
 	AdminDao admindao;
 	@Autowired
 	AdminServiceLayer adminservice;
-	
 	ModelAndView modelandview =new ModelAndView();
+	
+	
 	@RequestMapping(value="/userManagement")
 	public ModelAndView userManagement() {
-		modelandview.setViewName("usermanagement.jsp");
-		return modelandview;
+		
+		return adminservice.usermanagementservice();
+		
 	}
 	
 	@RequestMapping(value="/adminManagement")
 	public ModelAndView adminManagement() {
-		modelandview.setViewName("adminmanagement.jsp");
-		return modelandview;
+		
+		return adminservice.adminManagementservice();
+		
 	}
 	
 	
 	
 	@RequestMapping(value="/ordinaryHotel")
 	public ModelAndView ordinaryHotel() {
-		modelandview.setViewName("ordinaryhotel.jsp");
-		return modelandview;
+		
+		return adminservice.ordinaryHotelservice();
+		
 	}
 	
 	
 	
 	@RequestMapping(value="/AlibabaRestaurantAdminManagement")
 	public ModelAndView AlibabaRestaurantAdminManagement() {
-		modelandview.setViewName("alibabaRestaurantAdminManagement.jsp");
-		return modelandview;
+		return adminservice.AlibabaRestaurantAdminManagementservice();
+		
 	}
 	
 	
 	@RequestMapping(value="/AzheekalRestaurantAdminManagement")
 	public ModelAndView AzheekalRestaurantAdminManagement() {
-		modelandview.setViewName("azheekalRestaurantAdminManagement.jsp");
-		return modelandview;
+		return adminservice.AzheekalRestaurantAdminManagementservice();
+		
 	}
 	
 	
@@ -80,21 +84,20 @@ public class AdminController {
 	
 	
 	@RequestMapping("/addfood")
-	public String addfood(Model m) {
-		return adminservice.addfood(m);
-		/*List<Food> list1 = dao.getFoodDetails();
-		m.addAttribute("list1",list1);
-		return "addfood.jsp";*/
+	public ModelAndView addfood() {
+		return adminservice.addfoodservice();
 	}
 	
 	@RequestMapping(value="/inputAdmin")
-	public String addAdmin(HttpServletRequest request) {
+	public ModelAndView addAdmin(HttpServletRequest request) {
 		try {
-		return adminservice.insertAdminservice(request);
+			
+		return adminservice.insertAdminService(request);
 		}
 		catch(DuplicateKeyException duplicatekey) {
 			duplicatekey.printStackTrace();
-			return "adminExceptionByAdmin.jsp";
+			modelandview.setViewName("adminExceptionByAdmin.jsp");
+			return modelandview;
 		}
 		
 	}
@@ -102,61 +105,63 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="/passcode")
-	public String passcodeChecker(HttpServletRequest request) {
-		int passcode=Integer.parseInt(request.getParameter("passcode"));
-		if(passcode==123) {
-			return "/admin.jsp";
-		}else {
-			return "/error.jsp";
-		}
+	public ModelAndView passcodeChecker(HttpServletRequest request) {
+		
+		
+		return adminservice.passcodeCheckerservice(request);
+		
 		
 	}
 	
 	@RequestMapping(value="/addUser")
-	public String addUser() {
-		return "Adduser.jsp";
+	public ModelAndView addUser() {
+		
+		return adminservice.addUserservice();
+		
 	}
 	
 	@RequestMapping(value="/userRegistrationByAdmin")
-	public String UserRegistrationByAdmin(HttpServletRequest request) {
+	public ModelAndView UserRegistrationByAdmin(HttpServletRequest request) {
 		try {
-		return adminservice.registerByUser(request);
+			
+		return adminservice.registerByUserservice(request);
 		}catch(DuplicateKeyException key) {
-			return "adminExceptionPageOfUser.jsp";
+			modelandview.setViewName("adminExceptionPageOfUser.jsp");
+			return modelandview;
 		}
 	}
 	
 	
 	@RequestMapping(value="/deleteUser")
-	public String userDetails(Model m) {
-		List<Customer> customerList=admindao.GetFullUserDetails();
-		m.addAttribute("customerList",customerList);
-		return "customerDetailsByAdmin.jsp";
+	public ModelAndView userDetails() {
+		
+		return adminservice.userDetailsService();
+		
 	}
 	
 	
 	@RequestMapping(value="/DeleteCustomer")
-	public String DeleteCustomerByAdmin(Model m,HttpServletRequest request) {
-		int customer_id=Integer.parseInt(request.getParameter("customer_id"));
-		admindao.deleteCustomer(customer_id);
-		//m.addAttribute("customerList",customerList);
-		return "/deleteUser";
+	public ModelAndView DeleteCustomerByAdmin(Model m,HttpServletRequest request) {
+		
+		return adminservice.DeleteCustomerservice(request);
+		
+		
 	}
 	
 	
 	
 	@RequestMapping(value="/DeleteAdmin/{username}")
-	public String DeleteCustomerByAdmin(@PathVariable String username,Model m) {
-		admindao.deleteAdmin(username);
-		//m.addAttribute("customerList",customerList);
-		return "/deleteAdmin";
+	public ModelAndView DeleteCustomerByAdmin(@PathVariable String username) {
+		return adminservice.DeleteCustomerByAdminservice(username);
+		
 	}
 	
 	
 	
 	@RequestMapping(value="/UserExceptionByAdmin",method=RequestMethod.POST)
-	public String UserExceptionByAdmin() {
-		return "/admin.jsp";
+	public ModelAndView UserExceptionByAdmin() {
+		return adminservice.UserExceptionByAdminservice();
+		
 	}
 	
 	
@@ -167,10 +172,9 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="/deleteAdmin")
-	public String deleteAdmin(Model m) {
-		List<Admin> adminList=admindao.GetFullAdminDetails();
-		m.addAttribute("adminList",adminList);
-		return "adminDetailsByAdmin.jsp";
+	public ModelAndView deleteAdmin() {
+		return adminservice.deleteAdminservice();
+		
 	}
 	
 	
@@ -178,8 +182,8 @@ public class AdminController {
 	
 	
 	@RequestMapping("/changeprice")
-	public String changeprice(Model m) {
-		return adminservice.changePrice(m);
+	public ModelAndView changeprice() {
+		return adminservice.changePriceservice();
 		/*List<Food> list2 = dao.getFoodDetails();
 		m.addAttribute("list1",list2);
 		return "pricechange.jsp";*/
@@ -187,20 +191,16 @@ public class AdminController {
 	
 	
 	@RequestMapping("/pricechange/{food_id}")
-	public String pricechange(@PathVariable int food_id, HttpServletRequest request, HttpServletResponse response) {
-		
-		int price = Integer.parseInt(request.getParameter("price"));
-		admindao.changeprice(price,food_id);
-		return "redirect:/changeprice";
-		
+	public ModelAndView pricechange(@PathVariable int food_id, HttpServletRequest request, HttpServletResponse response) {
+		return adminservice.pricechangeservice(food_id,request);
 	}
 	
 	
 	
 
         @RequestMapping("/orderdetails")
-    	public String vieworder(Model m) {
-    		return adminservice.viewOrder(m);
+    	public ModelAndView vieworder(Model m) {
+    		return adminservice.viewOrderservice();
     		/*List<OrderDetails> list = admindao.getOrderDetails();
     		m.addAttribute("list",list);
     		return "order.jsp";*/
@@ -209,30 +209,29 @@ public class AdminController {
         
         
         @RequestMapping("/updatingfood/{food_id}")
-    	public String updatefood(@PathVariable int food_id, HttpServletRequest request, HttpServletResponse response) {
-    		int foodcount = Integer.parseInt(request.getParameter("count"));
-    		admindao.updatefoodcount(foodcount,food_id);
-    		return "redirect:/addfood";
+    	public ModelAndView updatefood(@PathVariable int food_id, HttpServletRequest request, HttpServletResponse response) {
+    		return adminservice.updatefoodservice(request,food_id);
+        	
+        	
     	}
         
         
         
         @RequestMapping(value="/orderDetailsOfAlibabaRolls")
         public ModelAndView orderDetailsOfAlibabaRolls() {
-        	modelandview.setViewName("OrderDetailRolls.jsp");
-        	List<OrderDetails> OrderFoodList = admindao.getOrderDetailsRolls();
-        	modelandview.addObject("OrderFoodListRolls",OrderFoodList);
-        	return modelandview;
+        	
+        	return adminservice.orderDetailsOfAlibabaRollsService();
+        	
+        	
         }
         
         
         
         @RequestMapping(value="/orderDetailsOfAlibabaChowmein")
         public ModelAndView orderDetailsOfAlibabaChowmein() {
-        	modelandview.setViewName("OrderDetailchowmein.jsp");
-        	List<OrderDetails> OrderFoodList = admindao.getOrderDetailschowmein();
-        	modelandview.addObject("OrderFoodListChowmein",OrderFoodList);
-        	return modelandview;
+        	
+        	return adminservice.orderDetailsOfAlibabaChowmeinservice();
+        	
         }
         
         
@@ -240,85 +239,63 @@ public class AdminController {
         
         @RequestMapping(value="/orderDetailsOfAzheekalSoup")
         public ModelAndView orderDetailsOfAzheekalSoup() {
-        	modelandview.setViewName("orderDetailsOfAzheekalsoup.jsp");
-        	List<OrderDetails> OrderFoodList = admindao.getOrderDetailssoup();
-        	modelandview.addObject("OrderFoodListSoup",OrderFoodList);
-        	return modelandview;
+        	
+        	return adminservice.orderDetailsOfAzheekalSoupService();
+        	
+        	
         }
         
         
         
         @RequestMapping(value="/orderDetailsOfAzheekalStartersDeepFry")
         public ModelAndView orderDetailsOfAzheekalstartersDeepFry() {
-        	modelandview.setViewName("orderDetailsOfAzheekalstartersDeepFry.jsp");
-        	List<OrderDetails> OrderFoodList = admindao.getOrderDetailsstartersdeepfry();
-        	modelandview.addObject("OrderFoodListStartersdeepfry",OrderFoodList);
-        	return modelandview;
+        	
+        	return adminservice.orderDetailsOfAzheekalstartersDeepFryservice();
+        	
         }
         
         
         @RequestMapping("/PriceChangeOfAlibabaRolls")
     	public ModelAndView PriceChangeOfAlibabaRolls() {
-    		//return adminservice.changePrice(m);
-        	
-    		List<Food> RollsFoodList = admindao.getFoodDetailsRolls();
-    		modelandview.addObject("RollsFoodList",RollsFoodList);
-    		modelandview.setViewName("priceChangeOfAlibabaRolls.jsp");
-    		return modelandview;
+        	return adminservice.PriceChangeOfAlibabaRollsservice();
+    		
     	}
     	
     	
     	@RequestMapping("/pricechangeRolls/{food_id}")
     	public ModelAndView pricechangeRolls(@PathVariable int food_id, HttpServletRequest request) {
+    		return adminservice.pricechangeRollsService(request,food_id);
     		
-    		int price = Integer.parseInt(request.getParameter("price"));
-    		admindao.changepriceRolls(price,food_id);
-    		modelandview.setViewName("redirect:/PriceChangeOfAlibabaRolls");
-    		return modelandview;
     		
     	}
     	
         
     	  @RequestMapping("/PriceChangeOfAlibabaChowmein")
     	public ModelAndView PriceChangeOfAlibabaChowmein() {
-    		//return adminservice.changePrice(m);
+    		return adminservice.PriceChangeOfAlibabaChowmeinservice();
         	
-    		List<Food> ChowmeinFoodList = admindao.getFoodDetailsChowmein();
-    		modelandview.addObject("ChowmeinFoodList",ChowmeinFoodList);
-    		modelandview.setViewName("priceChangeOfAlibabaChowmein.jsp");
-    		return modelandview;
+    		
     	}
     	
     	
     	@RequestMapping("/pricechangeChowmein/{food_id}")
     	public ModelAndView pricechangeChowmein(@PathVariable int food_id, HttpServletRequest request) {
-    		
-    		int price = Integer.parseInt(request.getParameter("price"));
-    		admindao.changepriceChowmein(price,food_id);
-    		modelandview.setViewName("redirect:/PriceChangeOfAlibabaChowmein");
-    		return modelandview;
-    		
+    		return adminservice.pricechangeChowmeinservice(request,food_id);
     	}
         
         
     	 @RequestMapping("/PriceChangeOfAzheekalSoup")
     	public ModelAndView PriceChangeOfAzheekalSoup() {
-    		//return adminservice.changePrice(m);
+    		return adminservice.PriceChangeOfAzheekalSoupservice();
         	
-    		List<Food> SoupFoodList = admindao.getFoodDetailsSoup();
-    		modelandview.addObject("SoupFoodList",SoupFoodList);
-    		modelandview.setViewName("priceChangeOfAzheekalSoup.jsp");
-    		return modelandview;
+    		
     	}
     	
     	
     	@RequestMapping("/pricechangeSoup/{food_id}")
     	public ModelAndView pricechangeSoup(@PathVariable int food_id, HttpServletRequest request) {
+    		return adminservice.pricechangeSoup(request,food_id);
     		
-    		int price = Integer.parseInt(request.getParameter("price"));
-    		admindao.changepriceSoup(price,food_id);
-    		modelandview.setViewName("redirect:/PriceChangeOfAzheekalSoup");
-    		return modelandview;
     		
     	}
         
@@ -330,22 +307,16 @@ public class AdminController {
         
     	 @RequestMapping("/PriceChangeOfAzheekalStartersDeepFry")
     	public ModelAndView PriceChangeOfAzheekalStartersDeepFry() {
-    		//return adminservice.changePrice(m);
+    		return adminservice.PriceChangeOfAzheekalStartersDeepFry();
         	
-    		List<Food> StartersdeepfryFoodList = admindao.getFoodDetailsStartersdeepfry();
-    		modelandview.addObject("StartersdeepfryFoodList",StartersdeepfryFoodList);
-    		modelandview.setViewName("priceChangeOfAzheekalStartersdeepfry.jsp");
-    		return modelandview;
+    		
     	}
     	
     	
     	@RequestMapping("/pricechangeStartersdeepfry/{food_id}")
     	public ModelAndView pricechangeStartersdeepfry(@PathVariable int food_id, HttpServletRequest request) {
+    		return adminservice.pricechangeStartersdeepfryservice(request,food_id);
     		
-    		int price = Integer.parseInt(request.getParameter("price"));
-    		admindao.changepriceStartersdeepfry(price,food_id);
-    		modelandview.setViewName("redirect:/PriceChangeOfAzheekalStartersDeepFry");
-    		return modelandview;
     		
     	}
         
@@ -356,21 +327,17 @@ public class AdminController {
         
     	@RequestMapping("/AddFoodOfAlibabaRolls")
     	public ModelAndView AddFoodOfAlibabaRolls() {
-    		//return adminservice.addfood(m);
-    		modelandview.setViewName("RollsaddFood.jsp");
-    		List<Food> RollsFoodDetailsList = admindao.getFoodDetailsRolls();
-    		modelandview.addObject("RollsFoodDetailsList",RollsFoodDetailsList);
-    		return modelandview;
+    		return adminservice.AddFoodOfAlibabaRolls();
+    		
     	}
         
         
         
     	  @RequestMapping("/updatingfoodRolls/{food_id}")
       	public ModelAndView updatefoodRolls(@PathVariable int food_id, HttpServletRequest request) {
-      		int foodcount = Integer.parseInt(request.getParameter("count"));
-      		modelandview.setViewName("redirect:/AddFoodOfAlibabaRolls");
-      		admindao.updatefoodcountRolls(foodcount,food_id);
-      		return modelandview;
+      		
+    		  return adminservice.updatefoodRollsService(request,food_id);
+    		  
       	}
         
         
@@ -380,84 +347,55 @@ public class AdminController {
         
     	 	@RequestMapping("/AddFoodOfAlibabaChowmein")
       	public ModelAndView AddFoodOfAlibabaChowmein() {
-      		//return adminservice.addfood(m);
-      		modelandview.setViewName("ChowmeinaddFood.jsp");
-      		List<Food> ChowmeinFoodDetailsList = admindao.getFoodDetailsChowmein();
-      		modelandview.addObject("ChowmeinFoodDetailsList",ChowmeinFoodDetailsList);
-      		return modelandview;
+      		return adminservice.AddFoodOfAlibabaChowmeinservice();
+      		
       	}
           
           
           
       	  @RequestMapping("/updatingfoodChowmein/{food_id}")
         	public ModelAndView updatefoodchowmein(@PathVariable int food_id, HttpServletRequest request) {
-        		int foodcount = Integer.parseInt(request.getParameter("count"));
-        		modelandview.setViewName("redirect:/AddFoodOfAlibabaChowmein");
-        		admindao.updatefoodcountChowmein(foodcount,food_id);
-        		return modelandview;
+        		
+      		  return adminservice.updatefoodchowmeinservice(request,food_id);
+      		  
+      		  
+      		  
         	}
           
        	@RequestMapping("/AddFoodOfAzheekalSoup")
       	public ModelAndView AddFoodOfAzheekalSoup() {
-      		//return adminservice.addfood(m);
-      		modelandview.setViewName("SoupaddFood.jsp");
-      		List<Food> SoupFoodDetailsList = admindao.getFoodDetailsSoup();
-      		modelandview.addObject("SoupFoodDetailsList",SoupFoodDetailsList);
-      		return modelandview;
+      		return adminservice.AddFoodOfAzheekalSoupservice();
+      		
       	}
           
           
           
       	  @RequestMapping("/updatingfoodSoup/{food_id}")
         	public ModelAndView updatingfoodSoup(@PathVariable int food_id, HttpServletRequest request) {
-        		int foodcount = Integer.parseInt(request.getParameter("count"));
-        		modelandview.setViewName("redirect:/AddFoodOfAzheekalSoup");
-        		admindao.updatefoodcountSoup(foodcount,food_id);
-        		return modelandview;
+        		
+      		  return adminservice.updatingfoodSoupservice(request,food_id);
+      		  
         	}
     	  
     	  
       	@RequestMapping("/AddFoodOfAzheekalStartersDeepFry")
       	public ModelAndView AddFoodOfAzheekalStartersDeepFry() {
-      		//return adminservice.addfood(m);
-      		modelandview.setViewName("StartersdeepfryaddFood.jsp");
-      		List<Food> StartersdeepfryFoodDetailsList = admindao.getFoodDetailsStartersdeepfry();
-      		modelandview.addObject("StartersdeepfryFoodDetailsList",StartersdeepfryFoodDetailsList);
-      		return modelandview;
+      		return adminservice.AddFoodOfAzheekalStartersDeepFryservice();
+      		
       	}
           
           
           
       	  @RequestMapping("/updatingfoodStartersdeepfry/{food_id}")
         	public ModelAndView updatingfoodStartersdeepfry(@PathVariable int food_id, HttpServletRequest request) {
-        		int foodcount = Integer.parseInt(request.getParameter("count"));
-        		modelandview.setViewName("redirect:/AddFoodOfAzheekalStartersDeepFry");
-        		admindao.updatefoodcountStartersdeepfry(foodcount,food_id);
-        		return modelandview;
+        		
+      		  return adminservice.updatingfoodStartersdeepfryservice(request,food_id);
+      		  
         	}
     	  
     	  
       	
-    	  
-    	  
-    	  
-    	  
-    	  
-    	  
-    	  
-    	  
-    	  
-    	  
-    	  
-    	  
-    	  
-    	  
-    	  
-    	  
-    	  
-        
-        
-        
+   
 
 }
 	

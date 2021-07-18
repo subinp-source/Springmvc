@@ -10,7 +10,7 @@
 <body>
 Enter passcode,if you are a admin,
 <form action="passcode">
-<input type="text" name="passcode">
+<input type="text" name="passcode" required>
 <input type="submit" value="ok">
 </form><br>
 or,go to booking page by clicking below..

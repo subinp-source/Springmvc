@@ -16,42 +16,34 @@ import com.project.modelclass.FoodCartAlibaba;
 import com.project.modelclass.FoodCartAzheekal;
 import com.project.modelclass.FoodListOfRestaurant;
 import com.project.modelclass.OutOfStock;
+import com.project.servicelayer.CustomerServiceLayer;
 
 @Controller
 public class AzheekalRestaurantBookingController {
 
 	@Autowired
 	CustomerDaoAzheekalRestaurant customerdaoazheekal;
+	@Autowired
+	CustomerServiceLayer customerservice;
 	ModelAndView modelandview =new ModelAndView();
 	int sum=0;
 	
 	@RequestMapping(value="/AzheekalRestaurant")
 	public ModelAndView AzheekalRestaurant(HttpServletRequest request) {
 		
-		 int customer_id=Integer.parseInt(request.getParameter("customer_id"));
-		 String username=request.getParameter("username");
-			modelandview.setViewName("FoodDetailsOfAzheekal.jsp");
-			modelandview.addObject("username", username);
-			modelandview.addObject("customer_id", customer_id);
-			return modelandview;
+		return customerservice.AzheekalRestaurantservice(request);
+		
 		
 		
 		
 	}
 	
 	@RequestMapping(value="/SelectFoodOfAzheekal")
-	public ModelAndView selectFoodOfAlibaba(HttpServletRequest request) {
-		int customer_id=Integer.parseInt(request.getParameter("customer_id"));
-		 String username=request.getParameter("username");
-		String foodlist=request.getParameter("foodlist");
-		List<FoodListOfRestaurant> listOfFood=customerdaoazheekal.LoadFoodDetails(foodlist);
-		modelandview.addObject("sum",sum);
-		modelandview.addObject("foodlist",foodlist);
-		modelandview.addObject("listOfFood",listOfFood);
-		modelandview.addObject("username",username);
-		modelandview.addObject("customer_id",customer_id);
-		modelandview.setViewName("azheekalrestaurant.jsp");
-		return modelandview;
+	public ModelAndView selectFoodOfAzheekal(HttpServletRequest request) {
+		
+		return customerservice.selectFoodOfAzheekalservice(request,sum);
+		
+		
 		
 	}
 	
@@ -119,12 +111,8 @@ public class AzheekalRestaurantBookingController {
 	public ModelAndView shipping(HttpServletRequest request) {
 		ModelAndView modelandview=new ModelAndView();
 		sum=0;
-		String username=request.getParameter("username");
-		String address=request.getParameter("address");
-		modelandview.addObject("username",username);
-		modelandview.addObject("address",address);
-		modelandview.setViewName("azheekalFinal.jsp");
-		return modelandview;
+		return customerservice.shippingazheekalservice(request);
+		
 	}
 	
 	

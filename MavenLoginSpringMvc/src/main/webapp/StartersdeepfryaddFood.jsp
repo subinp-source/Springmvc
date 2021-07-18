@@ -11,7 +11,7 @@
     <c:forEach var="food" items="${StartersdeepfryFoodDetailsList}">
         ${food.food_item} Rs.${food.food_price} 
         <form action="updatingfoodStartersdeepfry/${food.food_id}">
-        <input type="text" name="count">
+        <input type="text" name="count" required>
         <input type="submit" value="add"><br><br>
    </form>
    </c:forEach><br>

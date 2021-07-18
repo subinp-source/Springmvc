@@ -44,7 +44,7 @@ public class CustomerDao {
         });    
 }    
 	
-	    public  Boolean  saveCustomerDetails(final Customer customer) throws SQLIntegrityConstraintViolationException,DuplicateKeyException{ 
+	    public  Boolean  saveCustomerDetails(final Customer customer) { 
 	    String query="insert into users(username,password,firstname,lastname,email,address,phone) values(?,?,?,?,?,?,?)";  
 	    return jdbctemplate.execute(query,new PreparedStatementCallback<Boolean>(){  
 	    public Boolean doInPreparedStatement(PreparedStatement ps)  
@@ -319,14 +319,7 @@ public class CustomerDao {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }	
 
 

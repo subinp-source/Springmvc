@@ -163,7 +163,7 @@ public class AdminDao {
 
 	public int changeprice(int price, int food_id) {
 		
-		 String sql="update  set food_price="+price+" where food_id="+food_id;    
+		 String sql="update fooditem set food_price="+price+" where food_id="+food_id;    
 		    return jdbctemplate.update(sql);
 	}
 
@@ -415,13 +415,5 @@ public class AdminDao {
 	}
 
 
-
-
-	
-	
-	
-	
-	
-	
 
 }
