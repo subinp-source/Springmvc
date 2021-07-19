@@ -156,7 +156,6 @@ public ModelAndView userDetailsService() {
 public ModelAndView DeleteCustomerByAdminservice(String username) {
 	admindao.deleteAdmin(username);
 	modelandview.setViewName( "/deleteAdmin");
-	//m.addAttribute("customerList",customerList);
 	return modelandview;
 }
 
